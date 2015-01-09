@@ -1,4 +1,4 @@
-Flagship_Calabash_Feature
+Marvel_Calabash_Feature_Tests
 =========================
 
-Cucumber-Calabash tests for Flagship
+Cucumber-Calabash tests for Marvel
