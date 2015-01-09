@@ -1,0 +1,94 @@
+# uia_screen_shots save screen shots in a temporary folder and will move all of them to current test folder after
+# all test are finished - that is why we handle all the screen shots in 'exit' section.
+#CALABASH_RESULT_DIR = "/tmp/calabash"
+#$socket_port = 9000
+#$macos = false
+#$ipad_retina = false
+#$ipad_regular = false
+#$ipad_mini_retina = true
+
+#@@screen_shots = Array.new
+#TEST_REPORT_DIR = "test_report"
+#$connection ||= DD_Stage_Admin_Tool.new("Stage18396")
+#Calabash methods
+
+
+def launch_the_game
+  p $time_when_start_the_game = Time.now
+  if $calabash_launcher.nil?
+    $calabash_launcher = Calabash::Cucumber::Launcher.new
+    $calabash_launcher.relaunch
+    #$calabash_launcher.relaunch({:results_dir => ""})
+    $calabash_launcher.calabash_notify(self)
+    @@screen_shot_index=0
+  end
+end
+
+def exit_the_game
+  calabash_exit
+  if $calabash_launcher.active?
+    $calabash_launcher.stop
+  end
+  $calabash_launcher=nil
+end
+
+def restart_the_game
+  end_redis_client
+  exit_the_game
+  launch_the_game
+  start_redis_client
+end
+
+#Redis methods
+def start_redis_client
+  $redis ||= Redis.new
+end
+
+def end_redis_client
+  $redis.quit
+end
+
+#Screenshots Methods:
+def save_screen_shots_for_scenario(scenario)
+  screenshot_name = scenario.name.gsub(" ", "_")
+  @@screen_shots << screenshot_name
+  uia_screenshot(screenshot_name)
+  embed("#{screenshot_name}.png", "image/png", "SCREENSHOT")
+end
+
+def save_screen_for_each_step(scenario)
+  raw_screen_shot_name = scenario.name.gsub(" ", "_")
+  uia_screenshot(raw_screen_shot_name)
+  @@screen_shot_index+=1
+  screenshot = raw_screen_shot_name + "#{(@@screen_shot_index).to_s}"+".png"
+  embed(screenshot, "image/png", "SCREENSHOT")
+  @@screen_shots << screenshot
+end
+
+def move_screen_shots_to_test_report_folder
+  @@screen_shots.each do |screen_shot|
+    `sips -Z 640 "#{screen_shot}"`
+    `sips -r -90 "#{screen_shot}"`
+    FileUtils.mv(screen_shot, TEST_REPORT_DIR)
+  end
+end
+
+def update_screen_shots_name
+  @@screen_shots.each do |screen_shot|
+    FileUtils.mv(Dir.glob("#{screen_shot}*.png")[0], "#{screen_shot}.png")
+    FileUtils.mv("#{screen_shot}.png", TEST_REPORT_DIR)
+  end
+end
+
+def go_back_to_base_view
+  #if(is_object_on_screen?("BtnExit"))
+  #  touch_game_object_on_screen("BtnExit")
+  #end
+  api_click("BtnExit")
+end
+
+
+#Test Reports Methods:
+def empty_test_report_folder
+  FileUtils.rm_rf(Dir.glob("#{TEST_REPORT_DIR}/*"))
+end
