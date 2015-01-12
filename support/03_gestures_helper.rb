@@ -14,6 +14,29 @@ def touch_game_object_on_screen_if_it_shows_on_screen(object_name)
   end
 end
 
+
+def wait_and_touch_ios_device(object_name, options={})
+  wait_for_game_object_present_on_screen(object_name)
+  options[:wait_before_click]? (sleep options[:wait_before_click]) : (sleep 0)
+  position = get_game_object(object_name)
+  x = position["x"].to_i
+  y = position["y"].to_i
+  case TARGET_DEVICE
+    when "ipad_3"
+      #p "debug - touch button on ipad 3 !"
+      x = x/2
+      y = (y/2 - 768).abs
+      #touch(nil, :offset => {:x => x, :y => y})
+      uia_tap_offset("{:x #{x}, :y #{y}}")
+    when "ipad_2"
+      p "touch on ipad 2!"
+      #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)})
+      uia_tap_offset("{:x #{y}, :y #{x}}")
+  end
+end
+
+
+
 def touch_ios_device(object_name)
   #p "going to do touch!"
   position = get_game_object(object_name)
