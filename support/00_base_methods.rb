@@ -7,7 +7,7 @@
 #$ipad_regular = false
 #$ipad_mini_retina = true
 
-#@@screen_shots = Array.new
+#$screen_shots = Array.new
 #TEST_REPORT_DIR = "test_report"
 #$connection ||= DD_Stage_Admin_Tool.new("Stage18396")
 #Calabash methods
@@ -19,8 +19,7 @@ def launch_the_game
     $calabash_launcher = Calabash::Cucumber::Launcher.new
     $calabash_launcher.relaunch
     #$calabash_launcher.relaunch({:results_dir => ""})
-    $calabash_launcher.calabash_notify(self)
-    @@screen_shot_index=0
+    $calabash_launcher.calabash_notify(self)    
   end
 end
 
@@ -49,24 +48,27 @@ def end_redis_client
 end
 
 #Screenshots Methods:
-def save_screen_shots_for_scenario(scenario)
-  screenshot_name = scenario.name.gsub(" ", "_")
-  @@screen_shots << screenshot_name
+def save_screen_shots_for_step(screenshot_name, index)
+  screenshot_name = screenshot_name.gsub(" ", "_")
   uia_screenshot(screenshot_name)
-  embed("#{screenshot_name}.png", "image/png", "SCREENSHOT")
+  actual_screenshot_name = screenshot_name + index + ".png"
+  # FileUtils.mv(Dir.glob("#{screenshot_name}*.png")[0], "#{screenshot_name}.png")
+  embed(actual_screenshot_name, "image/png", "screenshot")
+  `sips -Z 640 "#{screen_shot}"`
+  `sips -r -90 "#{screen_shot}"`
 end
 
 def save_screen_for_each_step(scenario)
   raw_screen_shot_name = scenario.name.gsub(" ", "_")
   uia_screenshot(raw_screen_shot_name)
-  @@screen_shot_index+=1
-  screenshot = raw_screen_shot_name + "#{(@@screen_shot_index).to_s}"+".png"
-  embed(screenshot, "image/png", "SCREENSHOT")
-  @@screen_shots << screenshot
+  $screen_shot_index+=1
+  screenshot = raw_screen_shot_name + "#{($screen_shot_index).to_s}"+".png"
+  embed("Click_Home_Button1", "image/png", "SCREENSHOT")
+  $screen_shots << screenshot
 end
 
 def move_screen_shots_to_test_report_folder
-  @@screen_shots.each do |screen_shot|
+  $screen_shots.each do |screen_shot|
     `sips -Z 640 "#{screen_shot}"`
     `sips -r -90 "#{screen_shot}"`
     FileUtils.mv(screen_shot, TEST_REPORT_DIR)
@@ -74,7 +76,7 @@ def move_screen_shots_to_test_report_folder
 end
 
 def update_screen_shots_name
-  @@screen_shots.each do |screen_shot|
+  $screen_shots.each do |screen_shot|
     FileUtils.mv(Dir.glob("#{screen_shot}*.png")[0], "#{screen_shot}.png")
     FileUtils.mv("#{screen_shot}.png", TEST_REPORT_DIR)
   end
