@@ -32,10 +32,10 @@ def exit_the_game
 end
 
 def restart_the_game
-  end_redis_client
+  # end_redis_client
   exit_the_game
   launch_the_game
-  start_redis_client
+  # start_redis_client
 end
 
 #Redis methods
