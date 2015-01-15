@@ -1,18 +1,13 @@
-Given(/^I click the Staging Enviroment$/) do
+Given(/^I click the Staging Environment/) do
   # skip the fte
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.40, y:0.51}})]})
   # select staging env
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.56, y:0.21}})]})
 end
 
-BackOptionsButton
-Given(/^I click the Back Button On The Top Menu$/) do
-  # skip the fte
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.40, y:0.51}})]})
-  # select staging env
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.56, y:0.21}})]})
+Given(/^I wait and click the Back Button On The Top Menu$/) do
+  wait_and_touch_ios_device("Back", wait_before_click:1)
 end
-
 
 Given(/^I wait and touch the login screen$/) do
 	wait_for_game_object_present_on_screen("EBUI_Root")
@@ -97,3 +92,22 @@ end
 Given(/^I can see Home screen after wait$/) do  
   wait_for_game_object_present_on_screen("HomeScreen")
 end
+
+Given(/^I toggle the top bar menu$/) do
+  wait_and_touch_ios_device("TriangleDown", wait_before_click:5)
+end
+
+
+Given(/^I wait and click input bar$/) do
+  wait_and_touch_ios_device("Input", wait_before_click:6)
+end
+
+Given(/^I input text from keyboard$/) do
+  keyboard_enter_text("testuser")
+  done
+end
+
+Given(/^I click OK button$/) do
+  wait_and_touch_ios_device("ButtonOK", wait_before_click:2)
+end
+
