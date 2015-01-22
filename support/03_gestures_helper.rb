@@ -38,7 +38,7 @@ end
 
 
 def touch_ios_device(object_name)
-  #p "going to do touch!"
+  p "going to do touch -> " + object_name
   position = get_game_object(object_name)
   x = position["x"].to_i
   y = position["y"].to_i

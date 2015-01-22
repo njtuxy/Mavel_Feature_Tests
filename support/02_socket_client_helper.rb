@@ -64,10 +64,22 @@ def get_child_object(parent_object_name, child_index)
   send_request_and_get_response(request)
 end
 
+def get_game_object_x_coordinate_on_screen(object_name)
+  get_game_object(object_name)["x"]
+end
+
+def get_game_object_y_coordinate_on_screen(object_name)
+  get_game_object(object_name)["y"]
+end
 
 def get_game_object_text_on_screen(object_name)
-  get_game_object(object_name)["text0"]
+  get_game_object(object_name)["text00"]
 end
+
+def game_object_includes_text(object_name, text)
+  get_game_object(object_name).values.join().include?(text)
+end
+
 
 def wait_for_game_object_present_on_screen(object_name, timeout=30)
   Timeout.timeout(timeout) do
