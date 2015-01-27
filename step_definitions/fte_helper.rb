@@ -26,12 +26,12 @@ Then(/^I click text tap anywhere to continue on FTE screen$/) do
   sleep 2
 end
 
-# Then(/^I wait and click the Tutorial Confirmation Prompt$/) do
+# Then(/^I wait and c`lick the Tutorial Confirmation Prompt$/) do
 #   wait_and_touch_ios_device("TutorialConfirmationPrompt", wait_before_click:4)
 # end
 
 Then(/^I wait until Tutorial Confirmation Prompt present$/) do
-  wait_for_game_object_present_on_screen("TutorialConfirmationPrompt")
+  wait_until_I_see_the_fte_confirmation_prompt_window_on_screen
 end
 
 Then(/^I click the button on Tutorial Confirmation Prompt$/) do
@@ -42,14 +42,43 @@ Then(/^I click the button on special Tutorial Confirmation Prompt$/) do
   calabash_touch_ios(512, 625)
 end
 
+Then(/^I wait until I see the right anchor text on screen$/) do
+  wait_until_I_see_the_right_anchor_text_on_screen
+end
+
+Then(/^I wait until I see the left anchor text on screen$/) do
+  wait_until_I_see_the_left_anchor_text_on_screen
+end
+
+Then(/^I tap on the right side of the screen until right anchor text "(.*?)" is gone$/) do |arg1|
+   text_appears = game_object_includes_text("RightAnchor", arg1)
+   while(text_appears)
+       calabash_touch_ios(962,360)
+       text_appears = game_object_includes_text("RightAnchor", arg1)
+   end
+end
+
+Then(/^I swipe to right on screen until right anchor text is gone$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.90, y:0.90}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.90, y:0.90}})]})
+  while(get_visibility_of_right_anchor_text == true) do
+    swipe("right")
+    p "DEBUG ------>"
+    p "Try once!"
+    # get_visibility_of_right_anchor_text
+  end
+end
+
 
 
 Then(/^I wait and click right side of the screen on the introduction text for (\d+) times$/) do |arg1|
-  @counter = get_game_object_text_on_screen("RightAnchor")
-  until @counter.include?("4 / 4") do
-    calabash_touch_ios(962,360)
-    @counter = get_game_object_text_on_screen("RightAnchor")
-  end
+  # @counter = get_game_object_text_on_screen("RightAnchor")
+  # until @counter.include?("4 / 4") do
+  #   calabash_touch_ios(962,360)
+  #   @counter = get_game_object_text_on_screen("RightAnchor")
+  # end
+
+  # game_object_includes_text("RightAnchor", arg1)
 
   # Those methods are work!
   # send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.95, y:0.47}})]})
@@ -66,16 +95,17 @@ Then(/^I wait and click right side of the screen on the introduction text for (\
 end
 
 
-
-
-Then(/^I should see the introduction text "(.*?)" on right side of the screen$/) do |arg1|
+Then(/^I should see right anchor text "(.*?)"$/) do |arg1|
   assert game_object_includes_text("RightAnchor", arg1)
+end
+
+Then(/^I should see left anchor text "(.*?)"$/) do |arg1|
+  assert game_object_includes_text("LeftAnchor", arg1)
 end
 
 Then(/^I should see the introduction text "(.*?)" on the left side of the screen$/) do |arg1|
   assert game_object_includes_text("LeftAnchor", arg1)
 end
-
 
 Then(/^I swipe on screen from vertically to introduction text for (\d+) times$/) do |arg1|
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.90, y:0.90}})]})
@@ -127,15 +157,19 @@ end
 
 
 Then(/^I should get the FTE Tutorial Confirmation Prompt$/) do
-  wait_for_game_object_present_on_screen("TutorialConfirmationPrompt")
+  # wait_for_game_object_present_on_screen("TutorialConfirmationPrompt")
+  wait_until_I_see_the_fte_confirmation_prompt_window_on_screen
 end
 
-Then(/^I tap the right side of the screen for light attack until I get the prompt window with message "(.*?)"$/) do |arg1|
-  @counter = get_game_object_text_on_screen("TutorialConfirmationPrompt")
-  until @counter.include?(arg1) do
+
+Then(/^I tap the right side of the screen for light attack until I get the prompt window$/) do
+  while(get_visibility_of_fte_confirmation_prompt_window == false)
     calabash_touch_ios(962,360)
-    @counter = get_game_object_text_on_screen("TutorialConfirmationPrompt")
   end
+  # until @counter.include?(arg1) do
+  #   calabash_touch_ios(962,360)
+  #   @counter = get_game_object_text_on_screen("TutorialConfirmationPrompt")
+  # end
 end
 
 Then(/^I should get a dialog with message$/) do
@@ -150,9 +184,23 @@ Then(/^I click skip button$/) do
   touch_game_object_on_screen("SkipLabel")
 end
 
+Then(/^I wait and click skip button$/) do
+  wait_and_touch_ios_device("SkipLabel", wait_before_click:2)
+end
+
+
 Then(/^I wait and click go to vault button$/) do
   wait_and_touch_ios_device("1_Button", wait_before_click:2)
 end
+
+Then(/^I tap on the crystal$/) do
+  sleep 3
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.50, y:0.50}})]})
+end
+
+
+
+
 
 Then(/^I wait and claim the rewards by clicking the pricing button$/) do
   wait_and_touch_ios_device("Pricing_Button", wait_before_click: 2)
@@ -172,8 +220,14 @@ Then(/^I click a node to attack$/) do
   touch_building_on_screen("fx_p_map_flare_current_tile(Clone)")
 end
 
+Then(/^I wait and click a node to attack$/) do
+  sleep 3
+  wait_and_touch_ios_device("fx_p_map_flare_current_tile", wait_before_click:8)
+end
+
+
 Then(/^I wait and click fight button$/) do
-  wait_and_touch_ios_device("FightButton", wait_before_click:3)
+  wait_and_touch_ios_device("FightButton", wait_before_click:8)
 end
 
 Then(/^I swipe to left$/) do
@@ -183,6 +237,89 @@ end
 Then(/^I swipe to right$/) do
   swipe("right")
 end
+
+Then(/^I do light attack$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.95, y:0.47}})]})
+end
+
+Then(/^I do medium attack$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.90, y:0.90}})]})
+end
+
+Then(/^I do heavy attack$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].touchAndHold(1.8)]})
+end
+
+Then(/^I do block$/) do
+  send_uia_command({:command => "[target.touchAndHold({x: 0.14, y: 0.48}, 1.9)]"})
+end
+
+Then(/^I do special attack$/) do
+  touch_game_object_on_screen("ScalePivot")
+end
+
+Then(/^I click continue button$/) do
+  touch_game_object_on_screen("ContinueButton")
+end
+
+Then(/^I fight until I get the victory window$/) do
+  until (get_game_object("ContinueButton")["object_found"] == 'true') do
+     step "I do light attack"
+     step "I do light attack"
+     step "I do light attack"
+     step "I do medium attack"
+     step "I do special attack"
+  end
+end
+
+Then(/^I choose spider man to upgrade$/) do
+  wait_and_touch_ios_device("poolitem_0", wait_before_click:2)
+end
+
+Then(/^I wait and click upgrade button$/) do
+  wait_and_touch_ios_device("UpgradeButton", wait_before_click:2)
+end
+
+Then(/^I tap to add ios8$/) do
+  wait_and_touch_ios_device("poolitem_0", wait_before_click:2)
+end
+
+Then(/^I tap FuseButton$/) do
+  wait_and_touch_ios_device("FuseButton$", wait_before_click:2)
+end
+
+Then(/^I wait and click "Fight" button from main menu$/) do
+  wait_and_touch_ios_device("Fight", wait_before_click:2)
+end
+
+Then(/^I wait and click StoryQuestPanel$/) do
+  wait_and_touch_ios_device("StoryQuestPanel", wait_before_click:2)
+end
+
+Then(/^I wait and click Quest1$/) do
+  wait_and_touch_ios_device("Quest1", wait_before_click:2)
+end
+
+Then(/^I wait and click BeginQuestButton/) do
+  wait_and_touch_ios_device("BeginQuestButton", wait_before_click:2)
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
