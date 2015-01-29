@@ -222,7 +222,7 @@ Then(/^I tap in the center of the screen$/) do
 end
 
 Then(/^I wait and claim the rewards by clicking the pricing button$/) do
-  wait_and_touch_ios_device("Pricing_Button", wait_before_click: 2)
+  wait_and_touch_ios_device("Pricing_Button", wait_before_click: 5)
 end
 
 Then(/^I drag the crystal to the middle of the screen$/) do
