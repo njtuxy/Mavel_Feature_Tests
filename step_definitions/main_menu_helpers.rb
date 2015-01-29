@@ -31,22 +31,7 @@ Given(/^I wait and click the hard currency button$/) do
   # touch_ios_device("HardCurrencyButton")
 end
 
-Given(/^I can see the units store after wait$/) do  
-  wait_for_game_object_present_on_screen("HardCurrencyScreen")
-  # touch_ios_device("HardCurrencyButton")
-  # assert_equal(1,2)
-end
-
-Given(/^I wait and click the Store button$/) do 
-  wait_and_touch_ios_device("Store", wait_before_click:5)
-  # touch_ios_device("HardCurrencyButton")
-end
-
-Given(/^I can see Store after wait$/) do  
-  wait_for_game_object_present_on_screen("StoreLandingScreen")
-end
-
-Given(/^I wait and click the Inventory button$/) do 
+Given(/^I wait and click the Inventory button on main menu$/) do
   wait_and_touch_ios_device("MyStuff", wait_before_click:5)
   # touch_ios_device("HardCurrencyButton")
 end
@@ -55,7 +40,7 @@ Given(/^I can see Inventory after wait$/) do
   wait_for_game_object_present_on_screen("InventoryLandingScreen")
 end
 
-Given(/^I wait and click the Champions button$/) do 
+Given(/^I wait and click the Champions button on main menu$/) do
   wait_and_touch_ios_device("Heroes", wait_before_click:5)
   # touch_ios_device("HardCurrencyButton")
 end
@@ -64,7 +49,7 @@ Given(/^I can see Champions page after wait$/) do
   wait_for_game_object_present_on_screen("HeroesScreen")
 end
 
-Given(/^I wait and click the Crystal button$/) do 
+Given(/^I wait and click the Crystal button on main menu$/) do
   wait_and_touch_ios_device("Gacha", wait_before_click:5)
   # touch_ios_device("HardCurrencyButton")
 end
@@ -73,16 +58,16 @@ Given(/^I can see Crystal vault after wait$/) do
   wait_for_game_object_present_on_screen("GachaStoreScreen")
 end
 
-Given(/^I wait and click the Versus button$/) do 
-  wait_and_touch_ios_device("Versus", wait_before_click:5)
+Given(/^I wait and click the Alliance button on main menu$/) do
+  wait_and_touch_ios_device("Alliance", wait_before_click:5)
   # touch_ios_device("HardCurrencyButton")
 end
 
-Given(/^I can see Versus PVP after wait$/) do  
-  wait_for_game_object_present_on_screen("PVPScreen")
+Given(/^I can see Alliance screen after wait$/) do
+  wait_for_game_object_present_on_screen("AllianceNavScreen")
 end
 
-Given(/^I wait and click the Quest button$/) do 
+Given(/^I wait and click the Quest button on main menu$/) do
   wait_and_touch_ios_device("Quest", wait_before_click:5)
   # touch_ios_device("HardCurrencyButton")
 end
@@ -109,12 +94,19 @@ Given(/^I wait and click input bar$/) do
   wait_and_touch_ios_device("Input", wait_before_click:6)
 end
 
-Given(/^I input text from keyboard$/) do
-  keyboard_enter_text("testuser")
+Given(/^I input username from keyboard$/) do
+  sleep 5
+  keyboard_enter_text(SecureRandom.hex(6))
   done
 end
 
 Given(/^I click OK button$/) do
-  wait_and_touch_ios_device("ButtonOK", wait_before_click:2)
+  wait_and_touch_ios_device("ButtonOK", wait_before_click:3)
 end
+
+Given(/^I click back button to go back to previous screen$/) do
+  wait_and_touch_ios_device("Back", wait_before_click:2)
+end
+
+
 

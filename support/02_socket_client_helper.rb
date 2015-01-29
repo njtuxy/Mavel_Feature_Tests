@@ -83,27 +83,27 @@ end
 
 def wait_for_game_object_present_on_screen(object_name, timeout=30)
   Timeout.timeout(timeout) do
-    p "--- wait for game object present on screen ---"
+    # p "--- wait for game object present on screen ---"
     t1 = Time.now
     while (!is_object_on_screen?(object_name))
       sleep(1.0/10.0)
-      p "waiting for #{object_name} ..."
+      # p "waiting for #{object_name} ..."
     end
     t2 = Time.now
-    p "total time on waiting for #{object_name} to show on screen: " + ('%.1f' % (t2-t1)).to_s
+    # p "total time on waiting for #{object_name} to show on screen: " + ('%.1f' % (t2-t1)).to_s
   end
 end
 
 def wait_for_building_object_present_on_screen(object_name, timeout=30)
   Timeout.timeout(timeout) do
-    p "--- wait for game object present on screen ---"
+    # p "--- wait for game object present on screen ---"
     t1 = Time.now
     while (!is_building_object_on_screen?(object_name))
       sleep(1.0/10.0)
-      p "waiting for #{object_name} ..."
+      # p "waiting for #{object_name} ..."
     end
     t2 = Time.now
-    p "total time on waiting for #{object_name} to show on screen: " + ('%.1f' % (t2-t1)).to_s
+    # p "total time on waiting for #{object_name} to show on screen: " + ('%.1f' % (t2-t1)).to_s
   end
 end
 

@@ -19,7 +19,7 @@ end
 
 After do |scenario|  
   # move_screen_shots_to_test_report_folder(Dir.pwd)  
-  restart_the_game
+  # restart_the_game
 end
 
 
