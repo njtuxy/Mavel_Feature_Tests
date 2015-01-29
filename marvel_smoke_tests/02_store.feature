@@ -17,7 +17,7 @@ Feature: Smoke Test for store
      Then I am at store
 
   @Store_Items_Menu
-  Scenario: Go to crystal vault from store
+  Scenario: Go to Item store from store
     Given I am at store
       And I click Items button in store
      Then I can see Items store screen after wait
