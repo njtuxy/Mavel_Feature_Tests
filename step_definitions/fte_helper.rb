@@ -4,12 +4,9 @@ Given(/^I click the New UDID button on testing hud$/) do
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.17, y:0.52}})]})
 end
 
-# Given()do
-#   Label_Tap
-# end
-
-Then(/^I wait for text tap anywhere to continue present on screen$/) do
-  wait_for_game_object_present_on_screen("Label_Tap")
+Given(/^I tap on the screen to continue the FTE$/) do
+  step "I click text tap anywhere to continue on FTE screen"
+  step "I wait for text tap anywhere to continue present on screen"
 end
 
 Then(/^I should see the text "(.*?)" on FTE screen$/) do |arg1|
@@ -17,18 +14,28 @@ Then(/^I should see the text "(.*?)" on FTE screen$/) do |arg1|
 end
 
 
-Then(/^I should see the text "(.*?)" in FTE screen text panel$/) do |arg1|
-  assert game_object_includes_text("Panel_1", arg1)
-end
+# Then(/^I should see the text "(.*?)" in FTE screen text panel$/) do |arg1|
+#   assert game_object_includes_text("Panel_1", arg1)
+# end
 
 Then(/^I click text tap anywhere to continue on FTE screen$/) do
   calabash_touch_ios(20, 30)
   sleep 2
 end
 
+
+Then(/^I wait for text tap anywhere to continue present on screen$/) do
+  wait_for_game_object_present_on_screen("Label_Tap")
+end
+
 # Then(/^I wait and c`lick the Tutorial Confirmation Prompt$/) do
 #   wait_and_touch_ios_device("TutorialConfirmationPrompt", wait_before_click:4)
 # end
+Then(/^I wait and click to close Tutorial Confirmation Prompt$/) do
+  step "I wait until Tutorial Confirmation Prompt present"
+  step "I click the button on Tutorial Confirmation Prompt"
+end
+
 
 Then(/^I wait until Tutorial Confirmation Prompt present$/) do
   wait_until_I_see_the_fte_confirmation_prompt_window_on_screen
@@ -63,6 +70,17 @@ Then(/^I swipe to right on screen until right anchor text is gone$/) do
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.90, y:0.90}})]})
   while(get_visibility_of_right_anchor_text == true) do
     swipe("right")
+    p "DEBUG ------>"
+    p "Try once!"
+    # get_visibility_of_right_anchor_text
+  end
+end
+
+Then(/^I swipe to left on screen until left anchor text is gone$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.10, y:0.86}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.10, y:0.86}})]})
+  while(get_visibility_of_left_anchor_text == true) do
+    swipe("left")
     p "DEBUG ------>"
     p "Try once!"
     # get_visibility_of_right_anchor_text
@@ -180,9 +198,9 @@ Then(/^I click the special attack button$/) do
   touch_game_object_on_screen("ScalePivot")
 end
 
-Then(/^I click skip button$/) do
-  touch_game_object_on_screen("SkipLabel")
-end
+# Then(/^I click skip button$/) do
+#   touch_game_object_on_screen("SkipLabel")
+# end
 
 Then(/^I wait and click skip button$/) do
   wait_and_touch_ios_device("SkipLabel", wait_before_click:2)
@@ -198,9 +216,10 @@ Then(/^I tap on the crystal$/) do
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.50, y:0.50}})]})
 end
 
-
-
-
+Then(/^I tap in the center of the screen$/) do
+  sleep 3
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.50, y:0.50}})]})
+end
 
 Then(/^I wait and claim the rewards by clicking the pricing button$/) do
   wait_and_touch_ios_device("Pricing_Button", wait_before_click: 2)
@@ -211,24 +230,19 @@ Then(/^I drag the crystal to the middle of the screen$/) do
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.10, y:0.23}, endOffset:{x:0.50, y:0.50}})]})
 end
 
-Then(/^I wait until I get the new dialog$/) do
-  wait_for_game_object_present_on_screen("DialogueItem_04")
-end
-
 Then(/^I click a node to attack$/) do
   sleep 3
-  touch_building_on_screen("fx_p_map_flare_current_tile(Clone)")
+  touch_building_on_screen("tapId_0")
 end
 
 Then(/^I wait and click a node to attack$/) do
-  sleep 3
-  wait_and_touch_ios_device("fx_p_map_flare_current_tile", wait_before_click:8)
+  wait_and_touch_building_on_ios_device("tapId_0", wait_before_click:8)
 end
 
 
-Then(/^I wait and click fight button$/) do
-  wait_and_touch_ios_device("FightButton", wait_before_click:8)
-end
+# Then(/^I wait and click fight button$/) do
+#   wait_and_touch_ios_device("FightButton", wait_before_click:8)
+# end
 
 Then(/^I swipe to left$/) do
   swipe("left")
@@ -239,7 +253,7 @@ Then(/^I swipe to right$/) do
 end
 
 Then(/^I do light attack$/) do
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.95, y:0.47}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 2, touchCount: 1,tapOffset:{x:0.95, y:0.47}})]})
 end
 
 Then(/^I do medium attack$/) do
@@ -258,17 +272,21 @@ Then(/^I do special attack$/) do
   touch_game_object_on_screen("ScalePivot")
 end
 
-Then(/^I click continue button$/) do
-  touch_game_object_on_screen("ContinueButton")
+Then(/^I wait and click continue button$/) do
+  wait_and_touch_ios_device("ContinueButton", wait_before_click:3)
 end
 
 Then(/^I fight until I get the victory window$/) do
   until (get_game_object("ContinueButton")["object_found"] == 'true') do
      step "I do light attack"
-     step "I do light attack"
-     step "I do light attack"
-     step "I do medium attack"
-     step "I do special attack"
+  end
+end
+
+Then(/^I fight until I get the Tutorial Confirmation Prompt$/) do
+  visibility = get_visibility_of_fte_confirmation_prompt_window
+  until visibility == true
+    step "I do light attack"
+    visibility = get_visibility_of_fte_confirmation_prompt_window
   end
 end
 
@@ -285,7 +303,7 @@ Then(/^I tap to add ios8$/) do
 end
 
 Then(/^I tap FuseButton$/) do
-  wait_and_touch_ios_device("FuseButton$", wait_before_click:2)
+  wait_and_touch_ios_device("FuseButton", wait_before_click:2)
 end
 
 Then(/^I wait and click "Fight" button from main menu$/) do
@@ -302,7 +320,57 @@ end
 
 Then(/^I wait and click BeginQuestButton/) do
   wait_and_touch_ios_device("BeginQuestButton", wait_before_click:2)
+  sleep 3
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.88, y:0.92}})]})
 end
+
+Then(/^I wait and click "(.*?)"$/) do |arg1|
+  wait_and_touch_ios_device(arg1, wait_before_click:5)
+end
+
+Then (/^I wait and click fight button$/) do
+  wait_for_game_object_present_on_screen("FightButton")
+  sleep 3
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.88, y:0.92}})]})
+end
+
+Then(/^I tap the screen with x coordinate (\d+) and y coordinate (\d+)$/) do |arg1, arg2|
+  calabash_touch_ios(arg1, arg2)
+end
+
+Then(/^I wait and click pause button$/) do
+  wait_and_touch_ios_device("PauseButton", wait_before_click:2)
+end
+
+
+Then(/^I wait and click resume button$/) do
+  sleep 3
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.40, y:0.67}})]})
+end
+
+Then(/^I turn on the debug menu$/) do
+  step "I wait and click pause button"
+  sleep 5
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.95, y:0.10}})]})
+end
+
+Then(/^I close the debug menu$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.95, y:0.10}})]})
+end
+
+
+Then(/^I deplete health of opponents from debug menu$/) do
+  step "I turn on the debug menu"
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.81, y:0.64}})]})
+  sleep 3
+  step "I close the debug menu"
+  sleep 3
+  step "I wait and click resume button"
+end
+
+
+
+
 
 
 

@@ -9,27 +9,24 @@ Feature: Smoke Test the Main Menu
     And I touch anywhere to continue
     And I wait for text tap anywhere to continue present on screen
     And I wait 15 seconds
-    And I should see the text "Ah, this one is" in FTE screen text panel
+    And Text container "Panel_1" presents on screen with text "Ah, this one is"
+    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "But the serious collector lives for the thrill of the hunt."
+    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "CHAMPION: GAMORA"
+    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "COLLECTOR!!!"
+    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "Welcome, Summoner!"
     And I click text tap anywhere to continue on FTE screen
-    And I wait for text tap anywhere to continue present on screen
-    And I should see the text "But the serious collector lives for the thrill of the hunt." in FTE screen text panel
-    And I click text tap anywhere to continue on FTE screen
-    And I wait for text tap anywhere to continue present on screen
-    And I should see the text "CHAMPION: GAMORA" in FTE screen text panel
-    And I click text tap anywhere to continue on FTE screen
-    And I wait for text tap anywhere to continue present on screen
-    And I should see the text "COLLECTOR!!!" in FTE screen text panel
-    And I click text tap anywhere to continue on FTE screen
-    And I wait for text tap anywhere to continue present on screen
-    And I should see the text "Welcome, Summoner!" in FTE screen text panel
-    And I click text tap anywhere to continue on FTE screen
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
-  #Thor start to fight Hulk
+    And I wait and click to close Tutorial Confirmation Prompt
+
+    #Better with 2 hands message
     And I wait for text tap anywhere to continue present on screen
     And I wait 3 seconds
     And I click text tap anywhere to continue on FTE screen
 
+    #Thor V.S Hulk start
     #light attack
     And I wait until I see the right anchor text on screen
     And I should see right anchor text "LIGHT ATTACK"
@@ -46,98 +43,90 @@ Feature: Smoke Test the Main Menu
     And I press and hold on the left side of the screen for 4 seconds
 
     #Confirm windows
-   Then I should get the FTE Tutorial Confirmation Prompt
-    And I click the button on Tutorial Confirmation Prompt
+    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Heavy Attack
     And I wait until I see the right anchor text on screen
     And I should see right anchor text "HEAVY ATTACK"
     And I press and hold on the right side of the screen for 3 seconds
-
-   Then I should get the FTE Tutorial Confirmation Prompt
-#    And I click the button on special Tutorial Confirmation Prompt
-    And I click the button on Tutorial Confirmation Prompt
+    And I wait and click to close Tutorial Confirmation Prompt
 
     #Real fight starts!
+    And I wait 5 seconds
    Then I tap the right side of the screen for light attack until I get the prompt window
-   Then I click the button on Tutorial Confirmation Prompt
+   Then I wait and click to close Tutorial Confirmation Prompt
     And I click the special attack button
 
     #Battle won, get a message
    Then I should get a dialog which ID is "DialogueItem_00"
-    And I click skip button
+    And I wait and click "SkipLabel"
 
     #Go to vault
     And I wait and click go to vault button
-   Then I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+   Then I wait and click to close Tutorial Confirmation Prompt
 
     #Claim 50 Units reward
     And I wait and claim the rewards by clicking the pricing button
-   Then I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Drag crystal to open
     And I drag the crystal to the middle of the screen
-    And I tap on the crystal
-    Then I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    And I wait 6 seconds
+    And I tap in the center of the screen
+    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Drag another crystal to open
     And I drag the crystal to the middle of the screen
-    And I tap on the crystal
-    Then I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    And I wait 6 seconds
+    And I tap in the center of the screen
+    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Battle Kang's team
-    And I wait until I get the new dialog
-    And I click skip button
+    #And I wait until I get the new dialog
+    And I should get a dialog which ID is "DialogueItem_04"
+    And I wait and click "SkipLabel"
     And I click a node to attack
     And I wait 5 seconds
     And I wait and click fight button
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Dodge
-    And I swipe to left
+    And I swipe to left on screen until left anchor text is gone
     #Dash
-    And I swipe to right
+    And I swipe to right on screen until right anchor text is gone
 
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    Then I wait and click to close Tutorial Confirmation Prompt
+     And I wait and click to close Tutorial Confirmation Prompt
 
     #Real fight, Spider man v.s Iron man
-    And I fight until I get the victory window
+    And I deplete health of opponents from debug menu
+    And I fight until I get the Tutorial Confirmation Prompt
 
     #Victory window, claim reward
     And I click the button on Tutorial Confirmation Prompt
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
-    And I click continue button
+   Then I wait and click to close Tutorial Confirmation Prompt
+    And I wait and click continue button
 
     #Click to attack a new node
     And I wait and click a node to attack
-    And I click a node to attack
-    And I wait and click skip button
+    And I wait and click "SkipLabel"
     And I wait 5 seconds
     And I wait and click fight button
 
     #HAWKEYE V.S HULK
+    And I deplete health of opponents from debug menu
     And I fight until I get the victory window
 
 
     #COMPLETE WINDOW
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
-    And I click continue button
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    And I wait and click continue button
+    And I wait and click to close Tutorial Confirmation Prompt
+    And I wait and click continue button
 
     #Go to upgrade
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    And I wait and click to close Tutorial Confirmation Prompt
+    And I wait and click to close Tutorial Confirmation Prompt
+    And I wait and click to close Tutorial Confirmation Prompt
 
     #Click spider man to upgrade
     #poolitem_0
@@ -152,18 +141,20 @@ Feature: Smoke Test the Main Menu
     And I tap FuseButton
 
     #Finish upgrade
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
-
+    And I wait and click to close Tutorial Confirmation Prompt
+    And I wait and click to close Tutorial Confirmation Prompt
     #Click Fight! from Main Menu
     And I wait and click "Fight" button from main menu
     And I wait and click StoryQuestPanel
     And I wait and click Quest1
+
+    ##########problem here!!! cannot find the begin quest button
     And I wait and click BeginQuestButton
     And I wait and click skip button
-    And I click a node to attack
+    And I wait and click a node to attack
     And I wait and click skip button
     And I wait and click fight button
+
+    #Fight!
+    And I deplete health of opponents from debug menu
     And I fight until I get the victory window

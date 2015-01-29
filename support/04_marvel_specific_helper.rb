@@ -3,12 +3,6 @@ def get_visibility_of_fte_confirmation_prompt_window()
   send_request_and_get_response(request)["visible"]
 end
 
-def get_visibility_of_fte_confirmation_prompt_window()
-  request = {"command"=>"get_tutorial_prompt_window_visibility_status"}
-  send_request_and_get_response(request)["visible"]
-end
-
-
 def wait_until_I_see_the_fte_confirmation_prompt_window_on_screen()
   visibility = get_visibility_of_fte_confirmation_prompt_window
   until visibility == true

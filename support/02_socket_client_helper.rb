@@ -94,6 +94,19 @@ def wait_for_game_object_present_on_screen(object_name, timeout=30)
   end
 end
 
+def wait_for_building_object_present_on_screen(object_name, timeout=30)
+  Timeout.timeout(timeout) do
+    p "--- wait for game object present on screen ---"
+    t1 = Time.now
+    while (!is_building_object_on_screen?(object_name))
+      sleep(1.0/10.0)
+      p "waiting for #{object_name} ..."
+    end
+    t2 = Time.now
+    p "total time on waiting for #{object_name} to show on screen: " + ('%.1f' % (t2-t1)).to_s
+  end
+end
+
 def wait_for_game_socket_sever_is_ready
   Timeout.timeout(100) do
     t1 = Time.now
@@ -112,7 +125,9 @@ def is_object_on_screen?(object_name)
   get_game_object(object_name)["object_found"] == 'true'
 end
 
-
+def is_building_object_on_screen?(object_name)
+  get_building_object(object_name)["object_found"] == 'true'
+end
 
 def capture_screen_shot(screen_shot_name)
   uia_screenshot(screen_shot_name)
