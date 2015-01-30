@@ -29,10 +29,6 @@ Given(/^I click Units button in store$/) do
   wait_and_touch_ios_device("CurrencyButton", wait_before_click:2)
 end
 
-
 Given(/^I can see Items store screen after wait$/) do
   wait_for_game_object_present_on_screen("StoreScreen")
 end
-
-
-

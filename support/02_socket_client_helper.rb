@@ -189,34 +189,39 @@ def get_FPS_value_from_device
   end
 end
 
+def get_one_object_from_the_same_name_objects_by_index(object_name, index)
+  request = {"command"=>"get_all_one_objects_from_the_same_name_objects_by_index", "object_name"=>object_name, "index" => index.to_s}
+  send_request_and_get_response(request)
+end
+
 #uia_swipe_offset('{:x 384, :y 200}', '{:direction :left}')
 
-def store_data_to_google_drive(data)
-  session = GoogleDrive.login("kabamflagship@gmail.com", "Test123!")
-  ws = session.spreadsheet_by_key("1f8_gmyjP7EKGhoz-WLEKTFtLoioBxnHH00krAcEXsFI").worksheets[0]
-  data_counter = ws.rows.count
-  if data_counter == 0
-    new_row_index = 1;
-  else
-    new_row_index = data_counter.to_i + 1
-  end
-  ws[new_row_index, 1] = VERSION_NUMBER
-  ws[new_row_index, 2] = data
-  ws.save()
-end
-
-def store_loading_time_to_google_drive(end_time, start_time)
-  loading_time = ('%.2f' % (end_time-start_time)).to_s
-  session = GoogleDrive.login("kabamflagship@gmail.com", "Test123!")
-  ws = session.spreadsheet_by_key("1WOrG-3g5aNreQ8iN99f_9V34-B5b8boRwG0SKvqc8L4").worksheets[0]
-  data_counter = ws.rows.count
-  if data_counter == 0
-    new_row_index = 1;
-  else
-    new_row_index = data_counter.to_i + 1
-  end
-  ws[new_row_index, 1] = VERSION_NUMBER
-  # ws[new_row_index, 1] = VERSION_NUMBER + " " + Time.now.strftime("%Y-%m-%d %H:%M")
-  ws[new_row_index, 2] = loading_time
-  ws.save()
-end
+# def store_data_to_google_drive(data)
+#   session = GoogleDrive.login("kabamflagship@gmail.com", "Test123!")
+#   ws = session.spreadsheet_by_key("1f8_gmyjP7EKGhoz-WLEKTFtLoioBxnHH00krAcEXsFI").worksheets[0]
+#   data_counter = ws.rows.count
+#   if data_counter == 0
+#     new_row_index = 1;
+#   else
+#     new_row_index = data_counter.to_i + 1
+#   end
+#   ws[new_row_index, 1] = VERSION_NUMBER
+#   ws[new_row_index, 2] = data
+#   ws.save()
+# end
+#
+# def store_loading_time_to_google_drive(end_time, start_time)
+#   loading_time = ('%.2f' % (end_time-start_time)).to_s
+#   session = GoogleDrive.login("kabamflagship@gmail.com", "Test123!")
+#   ws = session.spreadsheet_by_key("1WOrG-3g5aNreQ8iN99f_9V34-B5b8boRwG0SKvqc8L4").worksheets[0]
+#   data_counter = ws.rows.count
+#   if data_counter == 0
+#     new_row_index = 1;
+#   else
+#     new_row_index = data_counter.to_i + 1
+#   end
+#   ws[new_row_index, 1] = VERSION_NUMBER
+#   # ws[new_row_index, 1] = VERSION_NUMBER + " " + Time.now.strftime("%Y-%m-%d %H:%M")
+#   ws[new_row_index, 2] = loading_time
+#   ws.save()
+# end

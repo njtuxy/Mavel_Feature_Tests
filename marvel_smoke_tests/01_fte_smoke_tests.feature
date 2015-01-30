@@ -125,10 +125,12 @@ Feature: Smoke Test the Main Menu
 
     #Go to upgrade
     And I wait and click to close Tutorial Confirmation Prompt
+    And I wait 3 seconds
     And I wait and click to close Tutorial Confirmation Prompt
-
+    And I wait 3 seconds
     #This line fails sometime, the test keeps waiting
-    And I wait and click to close Tutorial Confirmation Prompt
+
+    #And I wait and click to close Tutorial Confirmation Prompt
 
     #Click spider man to upgrade
     #poolitem_0

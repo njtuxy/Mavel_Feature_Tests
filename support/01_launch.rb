@@ -7,7 +7,9 @@
 launch_the_game
 
 at_exit do
-  exit_the_game
+
+  # exit_the_game
+
   # @@screenshot_names.each_with_index do |screenshot_name, index|     
   #    update_screen_shot_name(screenshot_name, index)     
   # end
