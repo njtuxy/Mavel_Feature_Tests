@@ -194,6 +194,10 @@ def get_one_object_from_the_same_name_objects_by_index(object_name, index)
   send_request_and_get_response(request)
 end
 
+def get_all_objects_with_the_same_name(object_name)
+  request = {"command"=>"get_all_objects_with_the_same_name", "object_name"=>object_name}
+  send_request_and_get_response(request)
+end
 #uia_swipe_offset('{:x 384, :y 200}', '{:direction :left}')
 
 # def store_data_to_google_drive(data)

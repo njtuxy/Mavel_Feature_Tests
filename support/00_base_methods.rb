@@ -21,6 +21,7 @@ def launch_the_game
     #$calabash_launcher.relaunch({:results_dir => ""})
     $calabash_launcher.calabash_notify(self)    
   end
+  log("calabash server connected")
 end
 
 def exit_the_game
@@ -109,6 +110,9 @@ def update_screen_shot_name(name, index)
   # FileUtils.mv(Dir.glob("#{name}#{(index+1).to_s}.png")[0], name+"_"+index.to_s+".png")
 end
 
+def log(message)
+  puts "# R2D2: #{message}, Sir."
+end
 # def update_screen_shots_name
 #   $screen_shots.each do |screen_shot|
 #     FileUtils.mv(Dir.glob("#{screen_shot}*.png")[0], "#{screen_shot}.png")

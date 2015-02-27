@@ -2,7 +2,7 @@
 Feature: Smoke Test for Inventory
 
   @Go_To_Inventory
-  Scenario: Go to Store from main menu
+  Scenario: Go to inventory from main menu
     Given I click the Staging Environment
     And I wait the login screen to present
     And I wait and click the Inventory button on main menu

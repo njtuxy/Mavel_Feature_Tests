@@ -157,6 +157,7 @@ Feature: Smoke Test the Main Menu
     And I wait and click skip button
     And I wait and click a node to attack
     And I wait and click skip button
+    And I wait and click to close Tutorial Confirmation Prompt
     And I wait and click fight button
 
     #Fight!

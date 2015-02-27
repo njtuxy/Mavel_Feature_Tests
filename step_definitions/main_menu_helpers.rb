@@ -1,6 +1,7 @@
 Given(/^I click the Staging Environment/) do
   # select staging env
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.56, y:0.21}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.50, y:0.21}})]})
+  log("UIA command executed! and touched staging Enviornment button at 0.50, 0.21")
 end
 
 Given(/^I click skip FTE button/) do
@@ -45,7 +46,7 @@ Given(/^I wait and click the Champions button on main menu$/) do
   # touch_ios_device("HardCurrencyButton")
 end
 
-Given(/^I can see Champions page after wait$/) do  
+Given(/^I can see Champions screen after wait$/) do
   wait_for_game_object_present_on_screen("HeroesScreen")
 end
 

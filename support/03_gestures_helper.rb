@@ -56,7 +56,7 @@ def wait_and_touch_building_on_ios_device(object_name, options={})
 end
 
 def touch_ios_device(object_name)
-  p "going to do touch -> " + object_name
+  # p "going to do touch -> " + object_name
   position = get_game_object(object_name)
   x = position["x"].to_i
   y = position["y"].to_i
@@ -74,11 +74,29 @@ def touch_ios_device(object_name)
   end
 end
 
+def touch_ios_device_with_screen_position(x,y)
+  x = x.to_i
+  y = y.to_i
+  case TARGET_DEVICE
+    when "ipad_3"
+      #p "debug - touch button on ipad 3 !"
+      x = x/2
+      y = (y/2 - 768).abs
+      #touch(nil, :offset => {:x => x, :y => y})
+      uia_tap_offset("{:x #{x}, :y #{y}}")
+    when "ipad_2"
+      p "touch on ipad 2!"
+      #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)})
+      uia_tap_offset("{:x #{y}, :y #{x}}")
+  end
+
+end
+
 def calabash_touch_ios(x,y)
   #uia.tapOffset("{:x #{x}, :y #{y}}")
   #touch(nil, :offset => {:x => x, :y => y})
   uia_tap_offset("{:x #{x}, :y #{y}}")
-  p "debug - touch success!"
+  # log("uia touch executed at #{x} and #{y}")
 end
 
 def double_tap_on_screen(x,y)

@@ -1,7 +1,8 @@
 # target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.17, y:0.52}});
 
 Given(/^I click the New UDID button on testing hud$/) do
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.17, y:0.52}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.13, y:0.51}})]})
+  log("UIA command executed! and touched UIDI button at 0.13, 0.51")
 end
 
 Given(/^I tap on the screen to continue the FTE$/) do
@@ -70,8 +71,6 @@ Then(/^I swipe to right on screen until right anchor text is gone$/) do
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.90, y:0.90}})]})
   while(get_visibility_of_right_anchor_text == true) do
     swipe("right")
-    p "DEBUG ------>"
-    p "Try once!"
     # get_visibility_of_right_anchor_text
   end
 end
@@ -81,8 +80,6 @@ Then(/^I swipe to left on screen until left anchor text is gone$/) do
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.58, y:0.86}, endOffset:{x:0.10, y:0.86}})]})
   while(get_visibility_of_left_anchor_text == true) do
     swipe("left")
-    p "DEBUG ------>"
-    p "Try once!"
     # get_visibility_of_right_anchor_text
   end
 end
@@ -222,12 +219,18 @@ Then(/^I tap in the center of the screen$/) do
 end
 
 Then(/^I wait and claim the rewards by clicking the pricing button$/) do
-  wait_and_touch_ios_device("Pricing_Button", wait_before_click: 5)
+  # wait_and_touch_ios_device("Pricing_Button", wait_before_click: 5)
+  wait_for_game_object_present_on_screen("Pricing_Button")
+  sleep 3
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.83, y:0.50}})]})
 end
 
 Then(/^I drag the crystal to the middle of the screen$/) do
-  sleep 3
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.10, y:0.23}, endOffset:{x:0.50, y:0.50}})]})
+  sleep 2
+  # target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.14, y:0.29}, duration:2.8});
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 2, touchCount: 1,tapOffset:{x:0.15, y:0.29}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.15, y:0.29}, endOffset:{x:0.50, y:0.50}})]})
+
 end
 
 Then(/^I click a node to attack$/) do
