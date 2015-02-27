@@ -22,6 +22,8 @@ end
 After do |scenario|  
   # move_screen_shots_to_test_report_folder(Dir.pwd)  
   # restart_the_game
+  #quite cucumber when a scenario fails, skip all the following scenarios.
+  Cucumber.wants_to_quit = true if scenario.failed?
 end
 
 

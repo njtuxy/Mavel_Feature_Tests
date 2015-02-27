@@ -29,7 +29,7 @@ Feature: Smoke Test for Inventory
     And I click upgrade items button in inventory
     Then I can see upgrade items screen after wait
     And I click Sell Champions button on GetMore prompt
-    And I can see Champions page after wait
+    And I can see Champions screen after wait
     And I click back button to go back to previous screen
 
   @Inventory_Items_Menu

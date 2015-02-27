@@ -32,8 +32,8 @@ Feature: Smoke Test the Main Menu
     Given I click the Staging Environment
     And I wait the login screen to present
     And I wait and click the Champions button on main menu
-   Then I can see Champions page after wait
-    And I click back button to go back to home screen
+   Then I can see Champions screen after wait
+    And I click back button to go back to previous screen
     And I can see Home screen after wait
 
 
@@ -43,7 +43,7 @@ Feature: Smoke Test the Main Menu
     And I wait the login screen to present
     And I wait and click the Crystal button on main menu
    Then I can see Crystal vault after wait
-    And I click back button to go back to home screen
+    And I click back button to go back to previous screen
     And I can see Home screen after wait
 
   @User_Can_Access_The_Alliance_Page_From_Menu_And_Choose_Player_Name
@@ -93,7 +93,7 @@ Feature: Smoke Test the Main Menu
    Then I can see Inventory after wait
     And I wait and click the Back Button On The Top Menu
     And I wait and click the Champions button on main menu
-   Then I can see Champions page after wait
+   Then I can see Champions screen after wait
     And I wait and click the Back Button On The Top Menu
     And I wait and click the Crystal button on main menu
    Then I can see Crystal vault after wait
