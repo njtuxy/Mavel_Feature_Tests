@@ -37,27 +37,3 @@ def wait_until_I_see_the_right_anchor_text_on_screen()
   end
 end
 
-def get_item_from_items_store(index)
-  get_one_object_from_the_same_name_objects_by_index("StoreItem(Clone)", index)
-end
-
-def get_get_now_buttons_from_items_store(index)
-  get_one_object_from_the_same_name_objects_by_index("BuyButton", index)
-end
-
-def touch_items_store_get_now_button_by_index(button_index)
-  button = get_get_now_buttons_from_items_store(button_index)
-  x = button["x"].to_i
-  y = button["y"].to_i
-  case TARGET_DEVICE
-    when "ipad_3"
-      x = x/2
-      y = (y/2 - 768).abs
-      #touch(nil, :offset => {:x => x, :y => y})
-      uia_tap_offset("{:x #{x}, :y #{y}}")
-    when "ipad_2"
-      p "touch on ipad 2!"
-      #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)})
-      uia_tap_offset("{:x #{y}, :y #{x}}")
-  end
-end
