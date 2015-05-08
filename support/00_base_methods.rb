@@ -71,6 +71,10 @@ def log(message)
   puts "# R2D2: #{message}, Sir."
 end
 
+def save_screen_shots_for_step(screenshot_name)
+  screenshot_embed({:prefix => "/Users/sfqatest/Kabam/Marvel/testReport/", :name=> "#{screenshot_name}.png", :label=> "screenshot"})
+end
+
 # def update_screen_shots_name
 #   $screen_shots.each do |screen_shot|
 #     FileUtils.mv(Dir.glob("#{screen_shot}*.png")[0], "#{screen_shot}.png")
