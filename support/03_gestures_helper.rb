@@ -8,7 +8,7 @@ end
 
 def touch_game_object_on_screen_if_it_shows_on_screen(object_name)
   #sleep 1
-  if(is_object_on_screen?(object_name))
+  if (is_object_on_screen?(object_name))
     p "found " + object_name +" and going to touch it!!"
     touch_game_object_on_screen(object_name)
   end
@@ -17,147 +17,66 @@ end
 
 def wait_and_touch_ios_device(object_name, options={})
   wait_for_game_object_present_on_screen(object_name)
-  options[:wait_before_click]? (sleep options[:wait_before_click]) : (sleep 0)
-  position = get_game_object(object_name)
-  x = position["x"].to_f
-  y = position["y"].to_f
-  x = (x/2)/1024
-  y = (y/2 - 768).abs/768
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:"#{x}", y:"#{y}"}})]})
-  # uia_tap_offset("{:x #{x}, :y #{y}}")
+  options[:wait_before_click] ? (sleep options[:wait_before_click]) : (sleep 0)
+  json = get_game_object(object_name)
+  touch_x_and_y_via_uia_command(json)
 end
 
 def wait_and_touch_building_on_ios_device(object_name, options={})
   wait_for_building_object_present_on_screen(object_name)
-  options[:wait_before_click]? (sleep options[:wait_before_click]) : (sleep 0)
-  position = get_building_object(object_name)
-  x = position["x"].to_i
-  y = position["y"].to_i
-  case TARGET_DEVICE
-    when "ipad_3"
-      #p "debug - touch button on ipad 3 !"
-      x = x/2
-      y = (y/2 - 768).abs
-      #touch(nil, :offset => {:x => x, :y => y})
-      uia_tap_offset("{:x #{x}, :y #{y}}")
-    when "ipad_2"
-      p "touch on ipad 2!"
-      #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)})
-      uia_tap_offset("{:x #{y}, :y #{x}}")
-  end
+  options[:wait_before_click] ? (sleep options[:wait_before_click]) : (sleep 0)
+  json = get_building_object(object_name)
+  touch_x_and_y_via_uia_tap(json)
 end
 
 def touch_ios_device(object_name)
-  # p "going to do touch -> " + object_name
-  position = get_game_object(object_name)
-  x = position["x"].to_i
-  y = position["y"].to_i
-  case TARGET_DEVICE
-    when "ipad_3"
-      #p "debug - touch button on ipad 3 !"
-      x = x/2
-      y = (y/2 - 768).abs
-      #touch(nil, :offset => {:x => x, :y => y})
-      uia_tap_offset("{:x #{x}, :y #{y}}")
-    when "ipad_2"
-      p "touch on ipad 2!"
-      #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)})
-      uia_tap_offset("{:x #{y}, :y #{x}}")
-  end
+  json = get_game_object(object_name)
+  touch_x_and_y_via_uia_tap(json)
 end
 
-def touch_ios_device_with_screen_position(x,y)
-  x = x.to_i
-  y = y.to_i
-  case TARGET_DEVICE
-    when "ipad_3"
-      #p "debug - touch button on ipad 3 !"
-      x = x/2
-      y = (y/2 - 768).abs
-      #touch(nil, :offset => {:x => x, :y => y})
-      uia_tap_offset("{:x #{x}, :y #{y}}")
-    when "ipad_2"
-      p "touch on ipad 2!"
-      #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)})
-      uia_tap_offset("{:x #{y}, :y #{x}}")
-  end
 
-end
-
-def calabash_touch_ios(x,y)
-  #uia.tapOffset("{:x #{x}, :y #{y}}")
-  #touch(nil, :offset => {:x => x, :y => y})
+def touch_ios_device_with_screen_position(x, y)
+  x = x/2
+  y = (y/2 - 768).abs
   uia_tap_offset("{:x #{x}, :y #{y}}")
-  # log("uia touch executed at #{x} and #{y}")
 end
 
-def double_tap_on_screen(x,y)
-  #touch(nil, :offset => {:x => x, :y => y})
+def calabash_direct_touch(x, y)
+  uia_tap_offset("{:x #{x}, :y #{y}}")
+end
+
+def double_tap_on_screen(x, y)
   double_tap(nil, :offset => {:x => x, :y => y})
-  #uia_tap_offset("{:x #{x}, :y #{y}}")
 end
 
 def api_click(object_name, sleep_time = 1)
-  request = {'command' => 'click_game_object', "object_name"=> object_name}
+  request = {'command' => 'click_game_object', "object_name" => object_name}
   send_request_and_get_response(request)
   sleep sleep_time
 end
 
 def touch_building_on_screen(building_name)
   #p "debug: going to touch the building: " + building_name
-  position = get_building_object(building_name)
-  x = position["x"]
-  y = position["y"]
-  case TARGET_DEVICE
-    when "ipad_3"
-      #p "debug - touch button on ipad 3 !"
-      x = x/2
-      y = (768-y/2)
-      #touch(nil, :offset => {:x => x, :y => y})
-      uia_tap_offset("{:x #{x}, :y #{y}}")
-  end
-  #touch(nil, :offset => {:x => (y.to_i)/2, :y => (x.to_i)/2}) if (TARGET_DEVICE=="ipad_3")
-  #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)}) if (TARGET_DEVICE=="ipad_2")
-  #api_click(object_name) if($macos)
+  json = get_building_object(building_name)
+  touch_x_and_y_via_uia_tap(json)
 end
 
 def touch_child_object_on_screen(parent_name, child_index)
-  position = get_child_object(parent_name, child_index)
-  x = position["x"]
-  y = position["y"]
-
-  case TARGET_DEVICE
-    when "ipad_3"
-      x = x/2
-      y = (768-y/2)
-      uia_tap_offset("{:x #{x}, :y #{y}}")
-  end
-
+  json = get_child_object(parent_name, child_index)
+  touch_x_and_y_via_uia_tap(json)
 end
 
+
 def touch_district_node(node_name)
-  position = get_building_object(node_name)
-  x = position["x"].to_i
-  y = position["y"].to_i
-  case TARGET_DEVICE
-    when "ipad_3"
-      #p "debug - touch button on ipad 3 !"
-      x = x/2
-      y = (y/2 - 768).abs
-      #touch(nil, :offset => {:x => x, :y => y})
-      uia_tap_offset("{:x #{x}, :y #{y}}")
-    when "ipad_2"
-      p "touch on ipad 2!"
-      #touch(nil, :offset => {:x => (y.to_i), :y => (x.to_i)})
-      uia_tap_offset("{:x #{y}, :y #{x}}")
-  end
+  json = get_building_object(node_name)
+  touch_x_and_y_via_uia_tap(json)
 end
 
 def input_chinese_text_from_keyboard(text)
-  calabash_touch_ios(113, 719)
+  calabash_direct_touch(113, 719)
   keyboard_enter_text(text)
-  calabash_touch_ios(409, 704)
-  calabash_touch_ios(113, 719)
+  calabash_direct_touch(409, 704)
+  calabash_direct_touch(113, 719)
   done
 end
 
@@ -169,4 +88,22 @@ end
 
 def touch_ios_button(button_text)
   uia_tap_mark(button_text)
+end
+
+private
+
+def touch_x_and_y_via_uia_command(json)
+  x = json["x"].to_f
+  y = json["y"].to_f
+  x = (x/2)/1024
+  y = (y/2 - 768).abs/768
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:"#{x}", y:"#{y}"}})]})
+end
+
+def touch_x_and_y_via_uia_tap(json)
+  x = json["x"].to_i
+  y = json["y"].to_i
+  x = x/2
+  y = (y/2 - 768).abs
+  uia_tap_offset("{:x #{x}, :y #{y}}")
 end

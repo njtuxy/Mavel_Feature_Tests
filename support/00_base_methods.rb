@@ -48,71 +48,29 @@ def end_redis_client
   $redis.quit
 end
 
-#Screenshots Methods:
-def save_screen_shots_for_step(screenshot_name)
-  uia_screenshot(screenshot_name)
-  screenshot_embed({:prefix => "/Users/sfqatest/Kabam/Marvel/testReport/", :name=> "#{screenshot_name}.png", :label=> "screenshot"})
-    # p "DEBUG +++++++++++++++++++++++1"
-    # p "screenshot_name: " + screenshot_name
-    # p "index: " + index.to_s
-    # p "expected_screenshot_name: " + expected_screenshot_name
-    # p Dir.glob("#{screenshot_name}*.png")
-    # p "DEBUG +++++++++++++++++++++++4"
-    # while File.exists?(current_screenshot_name) == false
-    #       p "DEBUG +++++++++++++++++++++++777777777"
-    #       p current_screenshot_name
-    #       p Dir.glob('*')
-    #       p "DEBUG +++++++++++++++++++++++8888888888"
-    #       sleep(3)
-    # end
+# #Screenshots Methods:
+#
+# def save_screen_for_each_step(scenario)
+#   raw_screen_shot_name = scenario.name.gsub(" ", "_")
+#   uia_screenshot(raw_screen_shot_name)
+#   $screen_shot_index+=1
+#   screenshot = raw_screen_shot_name + "#{($screen_shot_index).to_s}"+".png"
+#   embed("Click_Home_Button1", "image/png", "SCREENSHOT")
+#   $screen_shots << screenshot
+# end
 
-  # FileUtils.mv(Dir.glob("#{screenshot_name}*.png")[0], expected_screenshot_name)
-  # FileUtils.mv(expected_screenshot_name, "/Users/sfqatest/Kabam/Marvel/testReport")
-  #Do some trick here, because uia_screenshot method has its own index on screenshots, we need to translate it.
-  
-  
-  
-  # FileUtils.mv(actual_screenshot_name, "/Users/sfqatest/Kabam/Marvel/testReport/")
-  # embed(actual_screenshot_name, "image/png", "screenshot")
-  # `sips -Z 640 "#{screen_shot}"`
-  # `sips -r 90 "#{screen_shot}"`
+
+def delete_everything_in_testreport_folder
+  FileUtils.rm_rf('/Users/sfqatest/Kabam/Marvel/testReport')
+  FileUtils.mkdir_p('/Users/sfqatest/Kabam/Marvel/testReport')
 end
 
-def save_screen_for_each_step(scenario)
-  raw_screen_shot_name = scenario.name.gsub(" ", "_")
-  uia_screenshot(raw_screen_shot_name)
-  $screen_shot_index+=1
-  screenshot = raw_screen_shot_name + "#{($screen_shot_index).to_s}"+".png"
-  embed("Click_Home_Button1", "image/png", "SCREENSHOT")
-  $screen_shots << screenshot
-end
 
-def resize_screenshots_in_test_report_folder
-  # $screen_shots.each do |screen_shot|
-  Dir.chdir "/Users/sfqatest/Kabam/Marvel/testReport"
-  `sips -Z 640 *.png`
-  `sips -r -90 *.png`  
-  # FileUtils.mv(*.png, "/Users/sfqatest/Kabam/Marvel/testReport/")
-  # FileUtils.mv(*.png, "/Users/sfqatest/Kabam/Marvel/testReport/")
-  # end
-end
-
-def update_screen_shot_name(name, index)
-  # p "DEBUG =====>"
-  # p "#{name}#{(index+1).to_s}.png" 
-  # p index
-  # p Dir.glob("#{name}#{(index+1).to_s}.png")[0]
-  # p name+"_"+index.to_s+".png"
-  # p "DEBUG =====>"
-  screenshot_file = name+"_"+index.to_s+".png"
-  File.rename(Dir.glob("#{name}#{(index+1).to_s}.png")[0], screenshot_file)
-  FileUtils.mv(screenshot_file, "/Users/sfqatest/Kabam/Marvel/testReport")
-  # FileUtils.mv(Dir.glob("#{name}#{(index+1).to_s}.png")[0], name+"_"+index.to_s+".png")
-end
 
 def log(message)
   puts "# R2D2: #{message}, Sir."
 end
+
 # def update_screen_shots_name
 #   $screen_shots.each do |screen_shot|
 #     FileUtils.mv(Dir.glob("#{screen_shot}*.png")[0], "#{screen_shot}.png")

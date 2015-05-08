@@ -20,7 +20,7 @@ end
 # end
 
 Then(/^I click text tap anywhere to continue on FTE screen$/) do
-  calabash_touch_ios(20, 30)
+  calabash_direct_touch(20, 30)
   sleep 2
 end
 
@@ -37,6 +37,11 @@ Then(/^I wait and click to close Tutorial Confirmation Prompt$/) do
   step "I click the button on Tutorial Confirmation Prompt"
 end
 
+Then(/^I wait and click to close the Tutorial Confirmation Prompt if there is one$/) do
+  sleep 10
+  # step "I click the button on Tutorial Confirmation Prompt"
+  touch_ios_device("2_Button")
+end
 
 Then(/^I wait until Tutorial Confirmation Prompt present$/) do
   wait_until_I_see_the_fte_confirmation_prompt_window_on_screen
@@ -47,7 +52,7 @@ Then(/^I click the button on Tutorial Confirmation Prompt$/) do
 end
 
 Then(/^I click the button on special Tutorial Confirmation Prompt$/) do
-  calabash_touch_ios(512, 625)
+  calabash_direct_touch(512, 625)
 end
 
 Then(/^I wait until I see the right anchor text on screen$/) do
@@ -61,7 +66,7 @@ end
 Then(/^I tap on the right side of the screen until right anchor text "(.*?)" is gone$/) do |arg1|
    text_appears = game_object_includes_text("RightAnchor", arg1)
    while(text_appears)
-       calabash_touch_ios(962,360)
+       calabash_direct_touch(962,360)
        text_appears = game_object_includes_text("RightAnchor", arg1)
    end
 end
@@ -179,7 +184,7 @@ end
 
 Then(/^I tap the right side of the screen for light attack until I get the prompt window$/) do
   while(get_visibility_of_fte_confirmation_prompt_window == false)
-    calabash_touch_ios(962,360)
+    calabash_direct_touch(962,360)
   end
   # until @counter.include?(arg1) do
   #   calabash_touch_ios(962,360)
@@ -221,6 +226,8 @@ end
 Then(/^I wait and claim the rewards by clicking the pricing button$/) do
   # wait_and_touch_ios_device("Pricing_Button", wait_before_click: 5)
   wait_for_game_object_present_on_screen("Pricing_Button")
+  log(get_game_object_x_coordinate_on_screen("Pricing_Button"))
+  log(get_game_object_y_coordinate_on_screen("Pricing_Button"))
   sleep 3
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.83, y:0.50}})]})
 end
@@ -228,8 +235,11 @@ end
 Then(/^I drag the crystal to the middle of the screen$/) do
   sleep 2
   # target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.14, y:0.29}, duration:2.8});
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 2, touchCount: 1,tapOffset:{x:0.15, y:0.29}})]})
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.15, y:0.29}, endOffset:{x:0.50, y:0.50}})]})
+  # send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 2, touchCount: 1,tapOffset:{x:0.15, y:0.29}})]})
+  # send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.15, y:0.29}, endOffset:{x:0.50, y:0.50}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.11, y:0.25}, endOffset:{x:0.52, y:0.52}, duration:3.0})]})
+
+
 
 end
 
@@ -338,7 +348,7 @@ Then (/^I wait and click fight button$/) do
 end
 
 Then(/^I tap the screen with x coordinate (\d+) and y coordinate (\d+)$/) do |arg1, arg2|
-  calabash_touch_ios(arg1, arg2)
+  calabash_direct_touch(arg1, arg2)
 end
 
 Then(/^I wait and click pause button$/) do
