@@ -2,7 +2,7 @@
 
 Given(/^I click the New UDID button on testing hud$/) do
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.13, y:0.51}})]})
-  log("UIA command executed! and touched UIDI button at 0.13, 0.51")
+  # log("UIA command executed! and touched UIDI button at 0.13, 0.51")
 end
 
 Given(/^I tap on the screen to continue the FTE$/) do

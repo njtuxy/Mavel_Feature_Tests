@@ -2,7 +2,7 @@
 Feature: Smoke Test the Main Menu
 
   @fte_functionality
-  Scenario: user_can_view_the_available_crystals_for_purchase
+  Scenario: first_time_player_can_go_through_the_FTE
     Given I click the New UDID button on testing hud
     And I click the Staging Environment
     And I wait the login screen to present
@@ -157,7 +157,8 @@ Feature: Smoke Test the Main Menu
     And I wait and click skip button
     And I wait and click a node to attack
     And I wait and click skip button
-    And I wait and click to close Tutorial Confirmation Prompt
+    #WHY HAS THE FOLLOWING STEP: SOMETIMES PLAYER GOT WOLVERINE, AND IT HAS CLASS BONUS AND ONE CONFIRMATION WINDOW ABOUT IT.
+    And I wait and click to close the Tutorial Confirmation Prompt if there is one
     And I wait and click fight button
 
     #Fight!
