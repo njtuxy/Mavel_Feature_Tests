@@ -73,6 +73,7 @@ end
 
 def save_screen_shots_for_step(screenshot_name)
   screenshot_embed({:prefix => "/Users/sfqatest/Kabam/Marvel/testReport/", :name=> "#{screenshot_name}.png", :label=> "screenshot"})
+  # log "embed screenshot for #{screenshot_name}"
 end
 
 # def update_screen_shots_name

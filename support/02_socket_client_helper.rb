@@ -129,9 +129,9 @@ def is_building_object_on_screen?(object_name)
   get_building_object(object_name)["object_found"] == 'true'
 end
 
-def capture_screen_shot(screen_shot_name)
-  uia_screenshot(screen_shot_name)
-end
+# def capture_screen_shot(screen_shot_name)
+#   uia_screenshot(screen_shot_name)
+# end
 
 def convert_number_string_to_integer(number_string)
   Integer(number_string.gsub(" ", ""))

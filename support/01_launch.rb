@@ -53,8 +53,11 @@ AfterStep do |scenario|
   if !TAKE_SCREENSHOT_ONLY_FOR_FAILED_SCENARIO
     Screenshot::take_screenshot_for_step(scenario)
     if Screenshot::screenshot_names.length > 1
-      save_screen_shots_for_step(Screenshot::screenshot_names[-2])
+      save_screen_shots_for_step(Screenshot::screenshot_names[-2].gsub("_", ""))
     end
+    log ">>>>>>>>>>"
+    log Screenshot::screenshot_names
+    log "<<<<<<<<<<"
   end
 
 

@@ -14,7 +14,7 @@ class Screenshot
     # call method 'steps' and select the current step
     # we use .send because the method 'steps' is private for scenario outline
     step_title = current_feature.feature_elements[0].send(:steps).to_a[@step_count].name
-    screenshot_name =  (scenario.name + "_" + @step_count.to_s.rjust(2, '0') + "_" + step_title).gsub(" ", "_")
+    screenshot_name =  (scenario.name + @step_count.to_s.rjust(3, '0') + step_title).gsub!(/[^0-9A-Za-z]/, '') + "_"
     # save_screen_shots_for_step(screenshot_name)
     # //Take Screen shot
     uia_screenshot(screenshot_name)
@@ -24,11 +24,9 @@ class Screenshot
   end
 
   def self.finish_generating_screenshots
-    log "going to update screenshots' name"
     @@screenshot_names.each_with_index do |screenshot_name, index|
       update_screen_shot_name(screenshot_name, index)
     end
-    log "going to update screenshots sizes"
     resize_screenshots_in_test_report_folder
   end
 
@@ -38,10 +36,9 @@ class Screenshot
     `sips -r -90 *.png`
   end
 
-
   def self.update_screen_shot_name(name, index)
-    screenshot_file = name+"_"+index.to_s+".png"
-    File.rename(Dir.glob("#{name}#{(index+1).to_s}.png")[0], screenshot_file)
+    screenshot_file = name+(index+1).to_s+".png"
+    # File.rename(Dir.glob("#{name}#{(index).to_s}.png")[0], screenshot_file)
     FileUtils.mv(screenshot_file, "/Users/sfqatest/Kabam/Marvel/testReport")
   end
 
