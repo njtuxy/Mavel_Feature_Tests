@@ -9,15 +9,16 @@ Feature: Smoke Test the Main Menu
     And I touch anywhere to continue
     And I wait for text tap anywhere to continue present on screen
     And I wait 15 seconds
-    And Text container "Panel_1" presents on screen with text "Ah, this one is"
-    And I tap on the screen to continue the FTE
-    And Text container "Panel_1" presents on screen with text "But the serious collector lives for the thrill of the hunt."
-    And I tap on the screen to continue the FTE
-    And Text container "Panel_1" presents on screen with text "CHAMPION: GAMORA"
-    And I tap on the screen to continue the FTE
-    And Text container "Panel_1" presents on screen with text "COLLECTOR!!!"
-    And I tap on the screen to continue the FTE
-    And Text container "Panel_1" presents on screen with text "Welcome, Summoner!"
+    And Text container "Panel_1" presents on screen with text "Ah, this one is" and tap to continue fte
+#    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "But the serious collector lives for the thrill of the hunt." and tap to continue fte
+#    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "CHAMPION: GAMORA" and tap to continue fte
+#    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "COLLECTOR!!!" and tap to continue fte
+#    And I tap on the screen to continue the FTE
+    And Text container "Panel_1" presents on screen with text "Welcome, Summoner!" and tap to continue fte
+
     And I click text tap anywhere to continue on FTE screen
     And I wait and click to close Tutorial Confirmation Prompt
 
