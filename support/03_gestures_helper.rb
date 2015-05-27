@@ -97,6 +97,7 @@ def touch_x_and_y_via_uia_command(json)
   y = json["y"].to_f
   x = (x/2)/1024
   y = (y/2 - 768).abs/768
+  sleep 2
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:"#{x}", y:"#{y}"}})]})
 end
 
