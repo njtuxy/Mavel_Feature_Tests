@@ -17,18 +17,18 @@ end
 
 Given(/^I click economy button$/) do
   sleep 3
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.49, y:0.75}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.48, y:0.85}})]})
 end
 
 Given(/^I click the hard currency button input$/) do
   sleep 3
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.66, y:0.50}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.68, y:0.51}})]})
 end
 
 Given(/^I input number from keyboard$/) do
   wait_for_keyboard()
   sleep 3
-  keyboard_enter_text("1234")
+  keyboard_enter_text("9999")
   done
 end
 
