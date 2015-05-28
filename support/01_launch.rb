@@ -38,7 +38,7 @@ After do |scenario|
     # Screenshot::screenshot_names.each do |screenshot_name|
     #   save_screen_shots_for_step(screenshot_name)
     # end
-    save_screen_shots_for_step(Screenshot::screenshot_names.last)
+    save_screen_shots_for_step(Screenshot::screenshot_names.last.gsub("_", ""))
     Cucumber.wants_to_quit = true
   end
 
