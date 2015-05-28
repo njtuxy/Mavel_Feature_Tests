@@ -13,8 +13,8 @@ Feature: Smoke Test for store
     And I wait 3 seconds
     And I should see the following items on screen
       | Name                    | Order_from_the_right_of_the_screen | Price | Count |
-      | ENERGY REFILL             | 6                                  | 30    | 1     |
-      | LEVEL 2 HEALTH POTION     | 5                                  | 25    | 1     |
+      | ENERGY REFILL             | 6                                  | 30    | 0     |
+      | LEVEL 2 HEALTH POTION     | 5                                  | 25    | 0     |
       | LEVEL 2 TEAM HEALTH POTION| 4                                  | 50    | 0     |
       | LEVEL 2 REVIVE            | 3                                  | 40    | 0     |
       | LEVEL 2 TEAM REVIVE       | 2                                  | 100   | 0     |
