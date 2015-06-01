@@ -20,6 +20,11 @@ Then(/^Text container "(.*?)" presents on screen with text "(.*?)"$/) do |arg1, 
   assert game_object_includes_text(arg1, arg2)
 end
 
+Then(/^Text container "(.*?)" presents on screen with text "(.*?)" and tap to continue fte$/) do |arg1, arg2|
+  wait_for_game_object_present_on_screen(arg1)
+  assert game_object_includes_text(arg1, arg2)
+  step "I tap on the screen to continue the FTE"
+end
 
 
 
