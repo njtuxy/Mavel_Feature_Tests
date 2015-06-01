@@ -1,7 +1,7 @@
 Given(/^I click the Staging Environment/) do
   # select staging env
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.50, y:0.21}})]})
-  log("UIA command executed! and touched staging Enviornment button at 0.50, 0.21")
+  # log("UIA command executed! and touched staging Enviornment button at 0.50, 0.21")
 end
 
 Given(/^I click skip FTE button/) do
@@ -18,9 +18,21 @@ Given(/^I wait the login screen to present$/) do
 	wait_for_game_object_present_on_screen("EBUI_Root")
 end
 
+Given(/^I click the Staging Environment and I wait the login screen to present and I touch anywhere to continue$/) do
+  step "I click the Staging Environment"
+  wait_for_game_object_present_on_screen("EBUI_Root")
+  step "I touch anywhere to continue"
+end
+
+Given(/^I wait the login screen to present and I touch anywhere to continue$/) do
+  wait_for_game_object_present_on_screen("EBUI_Root")
+  step "I touch anywhere to continue"
+end
+
+
 Given(/^I touch anywhere to continue$/)do
   sleep 15
-  calabash_touch_ios(20, 30)
+  calabash_direct_touch(20, 30)
 end
 
 Given(/^I touch somewhere on the screen$/) do
