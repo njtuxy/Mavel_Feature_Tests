@@ -148,6 +148,10 @@ Feature: Smoke Test the Main Menu
     #Finish upgrade
     And I wait and click to close Tutorial Confirmation Prompt
     And I wait and click to close Tutorial Confirmation Prompt
+
+    #Close the timed reward window, claim the free gifts
+    And I wait and click claim free gift button
+
     #Click Fight! from Main Menu
     And I wait and click "Fight" button from main menu
     And I wait and click StoryQuestPanel

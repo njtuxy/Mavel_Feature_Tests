@@ -27,4 +27,6 @@ Then(/^Text container "(.*?)" presents on screen with text "(.*?)" and tap to co
 end
 
 
-
+And(/^I wait and click claim free gift button$/) do
+  wait_and_touch_ios_device("ClaimButton", wait_before_click:5)
+end
