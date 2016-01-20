@@ -4,9 +4,11 @@ Feature: Smoke Test the Main Menu
   @fte_functionality
   Scenario: first_time_player_can_go_through_the_FTE
     Given I click the New UDID button on testing hud
-    And I click the Staging Environment
-    And I wait the login screen to present
+    And I click the Dev Environment
+    And I wait 15 seconds
+#    And I wait the login screen to present
     And I touch anywhere to continue
+#    And I wait 60 seconds
     And I wait for text tap anywhere to continue present on screen
     And I wait 15 seconds
     And Text container "Panel_1" presents on screen with text "Ah, this one is" and tap to continue fte
@@ -19,12 +21,14 @@ Feature: Smoke Test the Main Menu
 #    And I tap on the screen to continue the FTE
     And Text container "Panel_1" presents on screen with text "Welcome, Summoner!" and tap to continue fte
 
-    And I click text tap anywhere to continue on FTE screen
-    And I wait and click to close Tutorial Confirmation Prompt
+#    And I click text tap anywhere to continue on FTE screen
+#    And I wait and click to close Tutorial Confirmation Prompt
 
     #Better with 2 hands message
-    And I wait for text tap anywhere to continue present on screen
-    And I wait 3 seconds
+    Then I wait and click to close Tutorial Confirmation Prompt
+    And I wait 10 seconds
+    And I click text tap anywhere to continue on FTE screen
+    And I wait 5 seconds
     And I click text tap anywhere to continue on FTE screen
 
     #Thor V.S Hulk start
@@ -44,6 +48,7 @@ Feature: Smoke Test the Main Menu
     And I press and hold on the left side of the screen for 4 seconds
 
     #Confirm windows
+    #FIX ME!
     Then I wait and click to close Tutorial Confirmation Prompt
 
     #Heavy Attack
@@ -53,9 +58,12 @@ Feature: Smoke Test the Main Menu
     And I wait and click to close Tutorial Confirmation Prompt
 
     #Real fight starts!
-    And I wait 5 seconds
-   Then I tap the right side of the screen for light attack until I get the prompt window
+#    And I wait 5 seconds
+#   Then I tap the right side of the screen for light attack until I get the prompt window
    Then I wait and click to close Tutorial Confirmation Prompt
+
+    #TOBEFIXED
+    And I wait 10 seconds
     And I click the special attack button
 
     #Battle won, get a message
@@ -67,8 +75,12 @@ Feature: Smoke Test the Main Menu
    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Claim 50 Units reward
+
+    #TOBEFIXED
     And I wait and claim the rewards by clicking the pricing button
-    Then I wait and click to close Tutorial Confirmation Prompt
+
+    #TOBEREMOVED
+#    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Drag crystal to open
     And I drag the crystal to the middle of the screen
@@ -80,6 +92,7 @@ Feature: Smoke Test the Main Menu
     And I drag the crystal to the middle of the screen
     And I wait 6 seconds
     And I tap in the center of the screen
+    And I wait 10 seconds
     Then I wait and click to close Tutorial Confirmation Prompt
 
     #Battle Kang's team
@@ -89,7 +102,8 @@ Feature: Smoke Test the Main Menu
     And I click a node to attack
     And I wait 5 seconds
     And I wait and click fight button
-    Then I wait and click to close Tutorial Confirmation Prompt
+    And I wait 20 seconds
+#    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Dodge
     And I swipe to left on screen until left anchor text is gone

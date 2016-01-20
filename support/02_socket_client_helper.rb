@@ -81,12 +81,12 @@ def game_object_includes_text(object_name, text)
 end
 
 
-def wait_for_game_object_present_on_screen(object_name, timeout=60)
+def wait_for_game_object_present_on_screen(object_name, timeout=180)
   Timeout.timeout(timeout) do
     # p "--- wait for game object present on screen ---"
     t1 = Time.now
     while (!is_object_on_screen?(object_name))
-      sleep(1.0/10.0)
+      sleep(1.0)
       # p "waiting for #{object_name} ..."
     end
     t2 = Time.now
@@ -99,7 +99,7 @@ def wait_for_building_object_present_on_screen(object_name, timeout=30)
     # p "--- wait for game object present on screen ---"
     t1 = Time.now
     while (!is_building_object_on_screen?(object_name))
-      sleep(1.0/10.0)
+      sleep(1.0)
       # p "waiting for #{object_name} ..."
     end
     t2 = Time.now
@@ -146,7 +146,7 @@ def wait_for_expected_number_shows_on_screen(expected_number)
       if(current_number.is_a?(String))
         current_number = convert_number_string_to_integer(current_number)
       end
-      sleep(1.0/3.0)
+      sleep(1.0)
       p "waiting for the correct number shows on screen!!"
     end
   end

@@ -1,7 +1,7 @@
 # target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.17, y:0.52}});
 
 Given(/^I click the New UDID button on testing hud$/) do
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.13, y:0.51}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.10, y:0.52}})]})
   # log("UIA command executed! and touched UIDI button at 0.13, 0.51")
 end
 
@@ -19,6 +19,12 @@ end
 #   assert game_object_includes_text("Panel_1", arg1)
 # end
 
+
+Then(/^I wait for tutorial confirmation prompt$/) do
+  wait_for_game_object_present_on_screen("TutorialConfirmationPrompt")
+  sleep 2
+end
+
 Then(/^I click text tap anywhere to continue on FTE screen$/) do
   calabash_direct_touch(20, 30)
   sleep 2
@@ -34,7 +40,7 @@ end
 # end
 Then(/^I wait and click to close Tutorial Confirmation Prompt$/) do
   step "I wait until Tutorial Confirmation Prompt present"
-  step "I click the button on Tutorial Confirmation Prompt"
+  step "I click text tap anywhere to continue on FTE screen"
 end
 
 Then(/^I wait and click to close the Tutorial Confirmation Prompt if there is one$/) do
@@ -225,11 +231,11 @@ end
 
 Then(/^I wait and claim the rewards by clicking the pricing button$/) do
   # wait_and_touch_ios_device("Pricing_Button", wait_before_click: 5)
-  wait_for_game_object_present_on_screen("Pricing_Button")
-  log(get_game_object_x_coordinate_on_screen("Pricing_Button"))
-  log(get_game_object_y_coordinate_on_screen("Pricing_Button"))
-  sleep 3
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.83, y:0.50}})]})
+  # wait_for_game_object_present_on_screen("Pricing_Button")
+  # log(get_game_object_x_coordinate_on_screen("Pricing_Button"))
+  # log(get_game_object_y_coordinate_on_screen("Pricing_Button"))
+  sleep 10
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.78, y:0.58}})]})
 end
 
 Then(/^I drag the crystal to the middle of the screen$/) do
@@ -238,9 +244,6 @@ Then(/^I drag the crystal to the middle of the screen$/) do
   # send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 2, touchCount: 1,tapOffset:{x:0.15, y:0.29}})]})
   # send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.15, y:0.29}, endOffset:{x:0.50, y:0.50}})]})
   send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.11, y:0.25}, endOffset:{x:0.52, y:0.52}, duration:3.0})]})
-
-
-
 end
 
 Then(/^I click a node to attack$/) do

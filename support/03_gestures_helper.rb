@@ -106,5 +106,6 @@ def touch_x_and_y_via_uia_tap(json)
   y = json["y"].to_i
   x = x/2
   y = (y/2 - 768).abs
+  # y = 768 - y/2
   uia_tap_offset("{:x #{x}, :y #{y}}")
 end

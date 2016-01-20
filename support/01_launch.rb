@@ -48,7 +48,7 @@ end
 
 
 
-#Capture screenshot for each test steps
+#Capture screenshot for each test step
 AfterStep do |scenario|
   if !TAKE_SCREENSHOT_ONLY_FOR_FAILED_SCENARIO
     Screenshot::take_screenshot_for_step(scenario)

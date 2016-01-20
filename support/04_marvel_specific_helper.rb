@@ -5,9 +5,11 @@ end
 
 def wait_until_I_see_the_fte_confirmation_prompt_window_on_screen()
   visibility = get_visibility_of_fte_confirmation_prompt_window
-  until visibility == true
-    sleep 0.5
-    visibility = get_visibility_of_fte_confirmation_prompt_window
+  Timeout.timeout(180) do
+    until visibility == true
+      sleep 1
+      visibility = get_visibility_of_fte_confirmation_prompt_window
+    end
   end
 end
 

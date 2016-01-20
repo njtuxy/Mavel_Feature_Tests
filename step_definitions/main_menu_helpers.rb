@@ -1,6 +1,6 @@
-Given(/^I click the Staging Environment/) do
+Given(/^I click the Dev Environment/) do
   # select staging env
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.50, y:0.21}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.42, y:0.06}})]})
   # log("UIA command executed! and touched staging Enviornment button at 0.50, 0.21")
 end
 
@@ -31,8 +31,10 @@ end
 
 
 Given(/^I touch anywhere to continue$/)do
-  sleep 15
-  calabash_direct_touch(20, 30)
+  sleep 8
+  # calabash_direct_touch(20, 30)
+  uia_tap_offset("{:x 100, :y 200}")
+  # send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.10, y:0.52}})]})
 end
 
 Given(/^I touch somewhere on the screen$/) do
