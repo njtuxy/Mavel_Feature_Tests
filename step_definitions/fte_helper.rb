@@ -322,8 +322,10 @@ Then(/^I wait and click upgrade button again and again$/) do
   wait_and_touch_ios_device("ActionButton", wait_before_click:2)
 end
 
+#TOBEFIXED
 Then(/^I wait and click pull tab button$/) do
-  wait_and_touch_ios_device("PullTab", wait_before_click:2)
+  # wait_and_touch_ios_device("PullTab", wait_before_click:2)
+  uia_tap_offset("{:x 0, :y 32}")
 end
 
 

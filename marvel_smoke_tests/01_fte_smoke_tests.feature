@@ -3,15 +3,16 @@ Feature: Smoke Test the Main Menu
 
   @fte_functionality
   Scenario: first_time_player_can_go_through_the_FTE
-#    Given I click the New UDID button on testing hud
+    Given I click the New UDID button on testing hud
     And I click the Dev Environment
-
     And I wait 15 seconds
 #    And I wait the login screen to present
     And I touch anywhere to continue
 #    And I wait 60 seconds
     And I wait for text tap anywhere to continue present on screen
+
     And I wait 15 seconds
+
     And Text container "Panel_1" presents on screen with text "Ah, this one is" and tap to continue fte
 #    And I tap on the screen to continue the FTE
     And Text container "Panel_1" presents on screen with text "But the serious collector lives for the thrill of the hunt." and tap to continue fte
@@ -96,7 +97,6 @@ Feature: Smoke Test the Main Menu
     And I wait 10 seconds
     Then I wait and click to close Tutorial Confirmation Prompt
 
-
     #Battle Kang's team
     #And I wait until I get the new dialog
     And I should get a dialog which ID is "DialogueItem_04"
@@ -148,35 +148,21 @@ Feature: Smoke Test the Main Menu
     #Go to upgrade
     #IOS-8 window
     And I wait and click to close Tutorial Confirmation Prompt
-    And I wait 3 seconds
-#    And I wait and click to close Tutorial Confirmation Prompt
-#    And I wait 3 seconds
-    #This line fails sometime, the test keeps waiting
-
-    #And I wait and click to close Tutorial Confirmation Prompt
-
-    #Click spider man to upgrade
-    #poolitem_0
-#    And I choose spider man to upgrade
-
-    #UpgradeButton
+    And I wait 10 seconds
     And I wait and click upgrade button
     And I wait and click to close Tutorial Confirmation Prompt
-#    And I click the button on Tutorial Confirmation Prompt
-    #poolitem_0
+
+    #Select the first champion to upgrade
     And I tap to add ios8
     And I wait and click upgrade button again
-
     And I tap to add ios8
     And I tap to add ios8
-#    And I tap FuseButton
     And I wait and click upgrade button again and again
-
-    #Finish upgrade
     And I wait and click to close Tutorial Confirmation Prompt
-#    And I wait and click to close Tutorial Confirmation Prompt
 
+    #FIXIT !
     And I wait and click pull tab button
+
     And I wait and click the Home button
     And I wait and click to close Tutorial Confirmation Prompt
 
