@@ -5,14 +5,10 @@ Feature: Smoke Test the Main Menu
   Scenario: first_time_player_can_go_through_the_FTE
     Given I click the New UDID button on testing hud
     And I click the Dev Environment
-    And I wait 15 seconds
-#    And I wait the login screen to present
+    And I wait the login screen to present
     And I touch anywhere to continue
-#    And I wait 60 seconds
-    And I wait for text tap anywhere to continue present on screen
-
-    And I wait 15 seconds
-
+    And I wait 60 seconds
+#    And I wait for text tap anywhere to continue present on screen
     And Text container "Panel_1" presents on screen with text "Ah, this one is" and tap to continue fte
 #    And I tap on the screen to continue the FTE
     And Text container "Panel_1" presents on screen with text "But the serious collector lives for the thrill of the hunt." and tap to continue fte
