@@ -11,7 +11,6 @@ delete_everything_in_testreport_folder
 
 at_exit do
 
-
   exit_the_game
 
   if TAKE_SCREENSHOT

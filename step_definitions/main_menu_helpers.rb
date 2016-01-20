@@ -15,7 +15,7 @@ Given(/^I wait and click the Back Button On The Top Menu$/) do
 end
 
 Given(/^I wait the login screen to present$/) do
-	wait_for_game_object_present_on_screen("EBUI_Root")
+	sleep 20
 end
 
 Given(/^I click the Staging Environment and I wait the login screen to present and I touch anywhere to continue$/) do
