@@ -96,6 +96,20 @@ Given(/^I wait and click the Home button$/) do
   # touch_ios_device("HardCurrencyButton")
 end
 
+Given(/^I wait and click the fight menu button$/) do
+  wait_and_touch_ios_device("Fight", wait_before_click:5)
+  # touch_ios_device("HardCurrencyButton")
+end
+
+Given(/^I wait and click the story quest button$/) do
+  wait_and_touch_ios_device("StoryQuest", wait_before_click:5)
+end
+
+Given(/^I wait and click the quest1 button$/) do
+  wait_and_touch_ios_device("Quest1", wait_before_click:5)
+end
+
+
 Given(/^I can see Home screen after wait$/) do  
   wait_for_game_object_present_on_screen("HomeScreen")
 end

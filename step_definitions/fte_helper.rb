@@ -311,8 +311,21 @@ Then(/^I choose spider man to upgrade$/) do
 end
 
 Then(/^I wait and click upgrade button$/) do
+  wait_and_touch_ios_device("CallToActionButton", wait_before_click:2)
+end
+
+Then(/^I wait and click upgrade button again$/) do
   wait_and_touch_ios_device("UpgradeButton", wait_before_click:2)
 end
+
+Then(/^I wait and click upgrade button again and again$/) do
+  wait_and_touch_ios_device("ActionButton", wait_before_click:2)
+end
+
+Then(/^I wait and click pull tab button$/) do
+  wait_and_touch_ios_device("PullTab", wait_before_click:2)
+end
+
 
 Then(/^I tap to add ios8$/) do
   wait_and_touch_ios_device("poolitem_0", wait_before_click:2)
@@ -361,7 +374,7 @@ end
 
 Then(/^I wait and click resume button$/) do
   sleep 3
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.40, y:0.67}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.60, y:0.67}})]})
 end
 
 Then(/^I turn on the debug menu$/) do
@@ -383,6 +396,25 @@ Then(/^I deplete health of opponents from debug menu$/) do
   sleep 3
   step "I wait and click resume button"
 end
+
+
+
+Then(/^I kill opponent from debug menu$/) do
+  step "I turn on the debug menu"
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.90, y:0.58}})]})
+  sleep 2
+end
+
+
+Then(/^I turn on god mode$/) do
+  step "I turn on the debug menu"
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.13, y:0.36}})]})
+  sleep 3
+  step "I close the debug menu"
+  sleep 3
+  step "I wait and click resume button"
+end
+
 
 
 

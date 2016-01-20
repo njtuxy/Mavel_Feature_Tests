@@ -3,8 +3,9 @@ Feature: Smoke Test the Main Menu
 
   @fte_functionality
   Scenario: first_time_player_can_go_through_the_FTE
-    Given I click the New UDID button on testing hud
+#    Given I click the New UDID button on testing hud
     And I click the Dev Environment
+
     And I wait 15 seconds
 #    And I wait the login screen to present
     And I touch anywhere to continue
@@ -95,6 +96,7 @@ Feature: Smoke Test the Main Menu
     And I wait 10 seconds
     Then I wait and click to close Tutorial Confirmation Prompt
 
+
     #Battle Kang's team
     #And I wait until I get the new dialog
     And I should get a dialog which ID is "DialogueItem_04"
@@ -102,7 +104,7 @@ Feature: Smoke Test the Main Menu
     And I click a node to attack
     And I wait 5 seconds
     And I wait and click fight button
-    And I wait 20 seconds
+    And I wait 25 seconds
 #    Then I wait and click to close Tutorial Confirmation Prompt
 
     #Dodge
@@ -111,75 +113,99 @@ Feature: Smoke Test the Main Menu
     And I swipe to right on screen until right anchor text is gone
 
     Then I wait and click to close Tutorial Confirmation Prompt
-     And I wait and click to close Tutorial Confirmation Prompt
+#     And I wait and click to close Tutorial Confirmation Prompt
 
     #Real fight, Spider man v.s Iron man
-    And I deplete health of opponents from debug menu
-    And I fight until I get the Tutorial Confirmation Prompt
+#    And I deplete health of opponents from debug menu
+    And I turn on god mode
 
-    #Victory window, claim reward
-    And I click the button on Tutorial Confirmation Prompt
-   Then I wait and click to close Tutorial Confirmation Prompt
-    And I wait and click continue button
+    And I kill opponent from debug menu
+
+    And I wait and click to close Tutorial Confirmation Prompt
+    And I wait 3 seconds
+    And I click text tap anywhere to continue on FTE screen
+#
+#    And I click the button on Tutorial Confirmation Prompt
+#   Then I wait and click to close Tutorial Confirmation Prompt
+#    And I wait and click continue button
 
     #Click to attack a new node
     And I wait and click a node to attack
     And I wait and click "SkipLabel"
     And I wait 5 seconds
     And I wait and click fight button
+    And I wait 20 seconds
 
-    #HAWKEYE V.S HULK
-    And I deplete health of opponents from debug menu
-    And I fight until I get the victory window
-
+    #Wof V.S Hulk
+    And I kill opponent from debug menu
+#    And I fight until I get the victory window
 
     #COMPLETE WINDOW
-    And I wait and click continue button
+#    And I wait and click continue button
     And I wait and click to close Tutorial Confirmation Prompt
-    And I wait and click continue button
+    And I click text tap anywhere to continue on FTE screen
 
     #Go to upgrade
+    #IOS-8 window
     And I wait and click to close Tutorial Confirmation Prompt
     And I wait 3 seconds
-    And I wait and click to close Tutorial Confirmation Prompt
-    And I wait 3 seconds
+#    And I wait and click to close Tutorial Confirmation Prompt
+#    And I wait 3 seconds
     #This line fails sometime, the test keeps waiting
 
     #And I wait and click to close Tutorial Confirmation Prompt
 
     #Click spider man to upgrade
     #poolitem_0
-    And I choose spider man to upgrade
+#    And I choose spider man to upgrade
+
     #UpgradeButton
     And I wait and click upgrade button
-    And I wait until Tutorial Confirmation Prompt present
-    And I click the button on Tutorial Confirmation Prompt
+    And I wait and click to close Tutorial Confirmation Prompt
+#    And I click the button on Tutorial Confirmation Prompt
     #poolitem_0
     And I tap to add ios8
+    And I wait and click upgrade button again
+
     And I tap to add ios8
-    And I tap FuseButton
+    And I tap to add ios8
+#    And I tap FuseButton
+    And I wait and click upgrade button again and again
 
     #Finish upgrade
     And I wait and click to close Tutorial Confirmation Prompt
+#    And I wait and click to close Tutorial Confirmation Prompt
+
+    And I wait and click pull tab button
+    And I wait and click the Home button
     And I wait and click to close Tutorial Confirmation Prompt
 
-    #Close the timed reward window, claim the free gifts
-    And I wait and click claim free gift button
-
-    #Click Fight! from Main Menu
-    And I wait and click "Fight" button from main menu
-    And I wait and click StoryQuestPanel
-    And I wait and click Quest1
-
-    ##########problem here!!! cannot find the begin quest button
+    And I wait and click the fight menu button
+    And I wait and click the story quest button
+    And I wait and click the quest1 button
     And I wait and click BeginQuestButton
-    And I wait and click skip button
-    And I wait and click a node to attack
-    And I wait and click skip button
-    #WHY HAS THE FOLLOWING STEP: SOMETIMES PLAYER GOT WOLVERINE, AND IT HAS CLASS BONUS AND ONE CONFIRMATION WINDOW ABOUT IT.
-    And I wait and click to close the Tutorial Confirmation Prompt if there is one
-    And I wait and click fight button
+    And I wait and click "SkipLabel"
 
-    #Fight!
-    And I deplete health of opponents from debug menu
-    And I fight until I get the victory window
+
+#
+#    #Close the timed reward window, claim the free gifts
+#    And I wait and click claim free gift button
+#
+#
+#    #Click Fight! from Main Menu
+#    And I wait and click "Fight" button from main menu
+#    And I wait and click StoryQuestPanel
+#    And I wait and click Quest1
+#
+#    ##########problem here!!! cannot find the begin quest button
+#    And I wait and click BeginQuestButton
+#    And I wait and click skip button
+#    And I wait and click a node to attack
+#    And I wait and click skip button
+#    #WHY HAS THE FOLLOWING STEP: SOMETIMES PLAYER GOT WOLVERINE, AND IT HAS CLASS BONUS AND ONE CONFIRMATION WINDOW ABOUT IT.
+#    And I wait and click to close the Tutorial Confirmation Prompt if there is one
+#    And I wait and click fight button
+#
+#    #Fight!
+#    And I deplete health of opponents from debug menu
+#    And I fight until I get the victory window
