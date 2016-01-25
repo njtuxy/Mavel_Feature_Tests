@@ -32,7 +32,7 @@ end
 
 
 Then(/^I wait for text tap anywhere to continue present on screen$/) do
-  wait_for_game_object_present_on_screen("Label_Tap")
+  wait_for_game_object_present_on_screen("TapAnywhereLabel")
 end
 
 # Then(/^I wait and c`lick the Tutorial Confirmation Prompt$/) do
@@ -42,6 +42,14 @@ Then(/^I wait and click to close Tutorial Confirmation Prompt$/) do
   step "I wait until Tutorial Confirmation Prompt present"
   step "I click text tap anywhere to continue on FTE screen"
 end
+
+Then(/^I click to close Tutorial Confirmation Prompt if it shows up$/) do
+
+  if get_visibility_of_fte_confirmation_prompt_window == true
+    step "I click text tap anywhere to continue on FTE screen"
+  end
+end
+
 
 Then(/^I wait and click to close the Tutorial Confirmation Prompt if there is one$/) do
   sleep 10
@@ -247,9 +255,17 @@ Then(/^I drag the crystal to the middle of the screen$/) do
 end
 
 Then(/^I click a node to attack$/) do
-  sleep 3
+  sleep 5
   touch_building_on_screen("tapId_0")
 end
+
+
+
+Then(/^I see progress bar presents on screen with text "(.*?)"$/) do |arg1|
+  wait_for_game_object_present_on_screen("ProgressBar")
+  assert game_object_includes_text("ProgressBar", arg1)
+end
+
 
 Then(/^I wait and click a node to attack$/) do
   wait_and_touch_building_on_ios_device("tapId_0", wait_before_click:8)
@@ -289,6 +305,22 @@ Then(/^I do special attack$/) do
 end
 
 Then(/^I wait and click continue button$/) do
+  wait_and_touch_ios_device("ContinueButton", wait_before_click:3)
+end
+
+Then(/^I wait and click back to quests button on quest completion window$/) do
+  wait_and_touch_ios_device("QuestsButton", wait_before_click:3)
+end
+
+Then(/^I wait and click back to play next button on quest completion window$/) do
+  wait_and_touch_ios_device("CallToActionButton", wait_before_click:3)
+end
+
+Then(/^I wait and click back to open crystal button on quest completion window$/) do
+  wait_and_touch_ios_device("ContinueButton", wait_before_click:3)
+end
+
+Then(/^I wait and click back to upgrade champions button on quest completion window$/) do
   wait_and_touch_ios_device("ContinueButton", wait_before_click:3)
 end
 
@@ -416,6 +448,15 @@ Then(/^I turn on god mode$/) do
   sleep 3
   step "I wait and click resume button"
 end
+
+Then(/^I turn on god mode and kill opponent$/) do
+  step "I turn on the debug menu"
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.13, y:0.36}})]})
+  sleep 3
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapCount: 1, touchCount: 1,tapOffset:{x:0.90, y:0.58}})]})
+  sleep 2
+end
+
 
 
 

@@ -185,7 +185,7 @@ Feature: Smoke Test the Main Menu
 #    And I wait and click a node to attack
 #    And I wait and click skip button
 #    #WHY HAS THE FOLLOWING STEP: SOMETIMES PLAYER GOT WOLVERINE, AND IT HAS CLASS BONUS AND ONE CONFIRMATION WINDOW ABOUT IT.
-#    And I wait and click to close the Tutorial Confirmation Prompt if there is one
+    And I wait and click to close the Tutorial Confirmation Prompt if there is one
 #    And I wait and click fight button
 #
 #    #Fight!

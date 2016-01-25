@@ -3,7 +3,7 @@ Feature: grant currency from debug menu
 
   @Debug_menu_add_hard_currency
   Scenario: user_can_grant_hard_currency_from_debug_menu
-     Given I click the Staging Environment
+     Given I click the Dev Environment
        And I wait the login screen to present
        And I wait and click the hard currency button
        And I call out the debug menu

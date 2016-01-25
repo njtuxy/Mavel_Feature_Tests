@@ -3,7 +3,7 @@ Feature: Smoke Test for store
 
   @Go_To_Store
   Scenario: Go to Store from main menu
-    Given I click the Staging Environment
+    Given I click the Dev Environment Environment
     And I wait the login screen to present
     And I wait and click the Store button on main menu
     Then I can see Store after wait

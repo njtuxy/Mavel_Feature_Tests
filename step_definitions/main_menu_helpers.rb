@@ -6,7 +6,7 @@ end
 
 Given(/^I click skip FTE button/) do
   # skip the fte
-  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.40, y:0.51}})]})
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.30, y:0.51}})]})
 end
 
 
@@ -107,6 +107,24 @@ end
 
 Given(/^I wait and click the quest1 button$/) do
   wait_and_touch_ios_device("Quest1", wait_before_click:5)
+end
+
+Given(/^I wait and click the edit team button$/) do
+  # wait_and_touch_ios_device("EditTeamButton", wait_before_click:15)
+  sleep 5
+  uia_tap_offset('{:x 512, :y 750 }')
+end
+
+Given(/^I drag a champion to the first spot$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.63, y:0.39}, endOffset:{x:0.19, y:0.18}, duration:2.2})]})
+end
+
+Given(/^I drag a champion to the second spot$/) do
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].dragInsideWithOptions({startOffset:{x:0.65, y:0.41}, endOffset:{x:0.20, y:0.34}, duration:2.2})]})
+end
+
+Given(/^I wait and click accept button$/) do
+  wait_and_touch_ios_device("DoneButton", wait_before_click:5)
 end
 
 
