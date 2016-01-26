@@ -109,6 +109,11 @@ Given(/^I wait and click the quest1 button$/) do
   wait_and_touch_ios_device("Quest1", wait_before_click:5)
 end
 
+Given(/^I wait and click the quest2 button$/) do
+  wait_and_touch_ios_device("Quest2", wait_before_click:5)
+end
+
+
 Given(/^I wait and click the edit team button$/) do
   # wait_and_touch_ios_device("EditTeamButton", wait_before_click:15)
   sleep 5

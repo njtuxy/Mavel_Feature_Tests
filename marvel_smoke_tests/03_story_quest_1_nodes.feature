@@ -23,7 +23,7 @@ Feature: Smoke Test the story quest1 nodes
       And I wait 5 seconds
       And I click to close Tutorial Confirmation Prompt if it shows up
       And I wait and click fight button
-      And I wait 15 seconds
+      And I wait 10 seconds
       And I turn on god mode and kill opponent
 #      And I kill opponent from debug menu
       And I wait for text tap anywhere to continue present on screen
