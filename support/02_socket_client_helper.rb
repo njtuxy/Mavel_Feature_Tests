@@ -17,15 +17,31 @@ include Calabash::Cucumber::TestsHelpers
 include Calabash::Cucumber::UIA
 
 def send_json_request_to_socket(request)
-  s = TCPSocket.open(SOCKET_SERVER, SOCKET_PORT)
-  # need a dummy request before any request, because the first request always get empty back, need to fix it later from SocketServer side.
-  s.gets
-  s.puts(request.to_json)
-  s.flush
-  res = s.gets.chomp
-  json_res = JSON.parse(res)
-  s.close
-  json_res
+  tries ||= 5
+  Timeout.timeout(3) do
+    s = TCPSocket.open(SOCKET_SERVER, SOCKET_PORT)
+    # need a dummy request before any request, because the first request always get empty back, need to fix it later from SocketServer side.
+    s.gets
+    # real request:
+    s.puts(request.to_json)
+    s.flush
+    res = s.gets.chomp
+    json_res = JSON.parse(res)
+    s.close
+    json_res
+  end
+
+  rescue Timeout::Error => e
+    tries -= 1
+    if tries > 0
+      "retrying"
+      retry
+    else
+      if @s!=nil
+        @s.close
+      end
+      "failed, exiting"
+    end
 end
 
 def is_socket_ready_to_connect?
@@ -87,7 +103,7 @@ def wait_for_game_object_present_on_screen(object_name, timeout=300)
     t1 = Time.now
     while (!is_object_on_screen?(object_name))
       sleep(1.0)
-      # p "waiting for #{object_name} ..."
+      p "waiting for #{object_name} ..."
     end
     t2 = Time.now
     # p "total time on waiting for #{object_name} to show on screen: " + ('%.1f' % (t2-t1)).to_s

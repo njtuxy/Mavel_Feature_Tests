@@ -29,11 +29,17 @@ Given(/^I wait the login screen to present and I touch anywhere to continue$/) d
   step "I touch anywhere to continue"
 end
 
+Given(/^I wait tap any where to continue to present on screen and tap to continue$/) do
+  wait_for_game_object_present_on_screen("Label_Tap")
+  step "I touch anywhere to continue"
+end
+
 
 Given(/^I touch anywhere to continue$/)do
   sleep 8
   # calabash_direct_touch(20, 30)
-  uia_tap_offset("{:x 100, :y 200}")
+  # uia_tap_offset("{:x 100, :y 200}")
+  send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.10, y:0.52}})]})
   # send_uia_command({:command => %Q[target.frontMostApp().mainWindow().elements()[0].tapWithOptions({tapOffset:{x:0.10, y:0.52}})]})
 end
 
