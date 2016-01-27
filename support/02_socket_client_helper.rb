@@ -97,7 +97,7 @@ def game_object_includes_text(object_name, text)
 end
 
 
-def wait_for_game_object_present_on_screen(object_name, timeout=300)
+def wait_for_game_object_present_on_screen(object_name, timeout=30)
   Timeout.timeout(timeout) do
     p "--- wait for game object present on screen : " + object_name
     t1 = Time.now

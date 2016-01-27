@@ -30,3 +30,12 @@ end
 And(/^I wait and click claim free gift button$/) do
   wait_and_touch_ios_device("ClaimButton", wait_before_click:5)
 end
+
+And(/^I should see level up popup with level (\d+) and tap to continue$/) do |arg1|
+  name = "LevelUpPopup"
+  wait_for_game_object_present_on_screen(name)
+  level = get_game_object(name)["text01"]
+  assert level ==  arg1
+  step "I touch anywhere to continue"
+
+end

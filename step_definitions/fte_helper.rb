@@ -31,8 +31,9 @@ Then(/^I click text tap anywhere to continue on FTE screen$/) do
 end
 
 
-Then(/^I wait for text tap anywhere to continue present on screen$/) do
+Then(/^I wait for text tap anywhere to continue present on screen and tap to continue$/) do
   wait_for_game_object_present_on_screen("TapAnywhereLabel")
+  step "I click text tap anywhere to continue on FTE screen"
 end
 
 # Then(/^I wait and c`lick the Tutorial Confirmation Prompt$/) do
