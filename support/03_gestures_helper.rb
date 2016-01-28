@@ -19,7 +19,8 @@ def wait_and_touch_ios_device(object_name, options={})
   wait_for_game_object_present_on_screen(object_name)
   options[:wait_before_click] ? (sleep options[:wait_before_click]) : (sleep 0)
   json = get_game_object(object_name)
-  touch_x_and_y_via_uia_command(json)
+  # touch_x_and_y_via_uia_command(json)
+  touch_x_and_y_via_uia_tap(json)
 end
 
 def wait_and_touch_building_on_ios_device(object_name, options={})
@@ -104,6 +105,10 @@ end
 def touch_x_and_y_via_uia_tap(json)
   x = json["x"].to_i
   y = json["y"].to_i
+  p "DEBUG >>>>>>>>>>>>>"
+  p x
+  p y
+  p "DEBUG >>>>>>>>>>>>>"
   x = x/2
   y = (y/2 - 768).abs
   # y = 768 - y/2

@@ -30,6 +30,11 @@ Then(/^I click text tap anywhere to continue on FTE screen$/) do
   sleep 2
 end
 
+Then(/^I click text tap anywhere to continue screen$/) do
+  calabash_direct_touch(20, 30)
+  sleep 2
+end
+
 
 Then(/^I wait for text tap anywhere to continue present on screen and tap to continue$/) do
   wait_for_game_object_present_on_screen("TapAnywhereLabel")
@@ -256,7 +261,7 @@ Then(/^I drag the crystal to the middle of the screen$/) do
 end
 
 Then(/^I click a node to attack$/) do
-  sleep 5
+  sleep 8
   touch_building_on_screen("tapId_0")
 end
 
@@ -391,6 +396,11 @@ end
 Then(/^I wait and click "(.*?)"$/) do |arg1|
   wait_and_touch_ios_device(arg1, wait_before_click:5)
 end
+
+Then(/^I wait and click "(.*?)" if there is one$/) do |arg1|
+  wait_and_touch_ios_device(arg1, wait_before_click:5)
+end
+
 
 Then (/^I wait and click fight button$/) do
   wait_for_game_object_present_on_screen("FightButton")

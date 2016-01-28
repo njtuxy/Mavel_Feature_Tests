@@ -103,7 +103,7 @@ Given(/^I wait and click the Home button$/) do
 end
 
 Given(/^I wait and click the fight menu button$/) do
-  wait_and_touch_ios_device("Fight", wait_before_click:5)
+  wait_and_touch_ios_device("Fight", wait_before_click:8)
   # touch_ios_device("HardCurrencyButton")
 end
 
